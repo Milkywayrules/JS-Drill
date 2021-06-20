@@ -3,7 +3,7 @@ const searchBtn = document.getElementById("submit");
 const preview = document.getElementById("preview");
 
 const apiKey = "32913f44"; // jangan dipake sembarangan yak, bikin aja akun sendiri di "http://www.omdbapi.com/". GRATIS.
-const baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
+const baseUrl = `https://www.omdbapi.com/?apikey=${apiKey}`;
 
 searchBtn.onclick = () => {
   searchBtn.disabled = true;

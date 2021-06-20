@@ -4,7 +4,7 @@ const searchBtn = document.getElementById("submit");
 
 // api key dan base url
 const apiKey = "32913f44"; // jangan dipake sembarangan yak, bikin aja akun sendiri di "http://www.omdbapi.com/". GRATIS.
-const baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}&plot=full`;
+const baseUrl = `https://www.omdbapi.com/?apikey=${apiKey}&plot=full`;
 
 // show or hide some element with ID provided
 const shorOrHide = (elName, state) => {
