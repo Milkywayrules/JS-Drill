@@ -12,10 +12,11 @@ export const CardSingleSearch = (
     imdbRating,
     Rated,
     Plot,
+    imdbID
   }
 ) => `
   <div
-    id="card-${idx}"
+    id="${imdbID}"
     class="max-w-md mx-auto shadow-md overflow-hidden md:max-w-4xl"
   >
     <div
@@ -31,7 +32,7 @@ export const CardSingleSearch = (
     >
 
       <div class="overflow-hidden md:flex-shrink-0">
-        <a href="#">
+        <a href="#${imdbID}">
           <img
             class="
               h-full
@@ -51,7 +52,7 @@ export const CardSingleSearch = (
 
       <div class="p-8 bg-white">
         <a
-          href="#"
+          href="#${imdbID}"
           class="
             text-2xl
             leading-tight

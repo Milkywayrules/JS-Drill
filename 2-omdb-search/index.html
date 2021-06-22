@@ -8,10 +8,12 @@
       name="description"
       content="Search your favorite movie and fetch them trough RESTful API from http://www.omdbapi.com/"
     />
-    <link rel="stylesheet" href="./style-2.css" />
 
     <title>#2 - OMDB Search</title>
-    <link rel="shortcut icon" href="../assets/icon/favicon.ico" />
+    <script src="../favicon.js"></script>
+
+    <!-- load css & js -->
+    <link rel="stylesheet" href="./style-2.css" />
   </head>
   <body class="m-5 bg-gray-900 selection:bg-pink-400 selection:text-white">
     <header class="mt-52 mb-5 flex flex-col lg:mt-40">
@@ -84,157 +86,8 @@
       <h2 class="mx-auto text-white text-xl">Search results</h2>
 
       <!-- cards wrapper -->
-      <div class="wrapper flex flex-col gap-3">
-        <!-- card -->
-        <div
-          id="card-1"
-          class="
-            max-w-md
-            mx-auto
-            shadow-md
-            overflow-hidden
-            md:max-w-3xl
-          "
-        >
-          <div class="rounded-xl border-4 border-transparent overflow-hidden transition-color duration-150 hover:border-pink-600 md:flex">
-            <!-- img -->
-            <div class="overflow-hidden md:flex-shrink-0">
-              <a href="#">
-                <img
-                  class="h-full w-full object-cover transition-transform duration-300 transform hover:scale-105 md:w-48"
-                  src="data:image/png;base64,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"
-                  alt="Man looking at item at a store"
-                />
-              </a>
-            </div>
-            <!-- /img -->
-            <!-- content -->
-            <div class="p-8 bg-white">
-              <a
-                href="#"
-                class="
-                  text-2xl
-                  leading-tight
-                  font-bold
-                  text-indigo-500
-                  transition-color
-                  duration-300
-                  hover:text-indigo-700
-                  hover:underline
-                "
-              >
-                One Punch Man: Wanpanman
-              </a>
-
-              <div
-                class="
-                  mt-2
-                  w-2/3
-                  md:w-1/3
-                  grid grid-cols-2 grid-rows-2 grid-flow-row
-                  gap-1
-                "
-              >
-                <small class="flex gap-1 col-span-2 text-gray-500 transition-color duration-300 hover:text-indigo-700" title="Genre">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 my-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"
-                    />
-                  </svg>
-                  <span id="_genre">Action, Anime, Thrill</span>
-                </small>
-                <small class="flex gap-1 text-gray-500 transition-color duration-300 hover:text-indigo-700" title="Total runtime">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 my-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span id="_runtime">125mins</span>
-                </small>
-
-                <small class="flex gap-1 text-gray-500 transition-color duration-300 hover:text-indigo-700" title="Released date">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 my-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span id="_released">17Juli1998</span>
-                </small>
-
-                <small class="flex gap-1 text-gray-500 transition-color duration-300 hover:text-indigo-700" title="Metascore rating"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 my-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                    />
-                  </svg>
-                  <span id="_metascore">89</span>/100
-                </small>
-
-                <small class="flex gap-1 text-gray-500 transition-color duration-300 hover:text-indigo-700" title="IMDB rating">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 my-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                    />
-                  </svg>
-                  <span id="_imdbRating">8</span>/10
-                </small>
-              </div>
-
-              <p class="mt-4 text-gray-700">
-                Getting a new business off the ground is a lot of hard work.
-                Here are five ideas you can use to find your first customers.
-              </p>
-            </div>
-            <!-- /content -->
-          </div>
-        </div>
-        <!-- /card -->
+      <div id="card-wrapper" class="flex flex-col gap-3">
+        <!-- ### Fetched data goes here ### -->
       </div>
       <!-- /cards wrapper -->
     </main>
@@ -251,5 +104,8 @@
     >
       <a href="https://dioilham.com" target="_blank">- Dio Ilham Djatiadi</a>
     </footer>
+
+    <!-- load js -->
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
