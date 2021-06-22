@@ -1,5 +1,4 @@
-import { CardSingleSearch, CardSeparator } from "./Component.js"
-
+import { CardSingleSearch, CardSeparator } from "./Component.js";
 
 // bikin artificial dataset
 const data = {

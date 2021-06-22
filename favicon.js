@@ -1,4 +1,8 @@
-export const favicon = () => `
+// IIFE immedieately invoked function expression
+
+(function() {
+
+  const htmlTemplate = `
   <!-- ****** faviconit.com favicons ****** -->
   <!-- ****** mantap betul faviconit ****** -->
   <link rel="shortcut icon" href="../assets/icon/favicon.ico">
@@ -23,4 +27,9 @@ export const favicon = () => `
   <meta name="msapplication-config" content="../assets/icon/browserconfig.xml">
   <!-- ****** mantap betul faviconit ****** -->
   <!-- ****** faviconit.com favicons ****** -->
-`;
+`
+// render favicon into head tag
+document
+  .getElementsByTagName("head")[0]
+  .insertAdjacentHTML("beforeend", htmlTemplate);
+})();
