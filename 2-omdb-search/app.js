@@ -1,18 +1,24 @@
 import { CardSingleSearch, CardSeparator } from "./components/Component.js";
 import { fetchMultiSearch } from "./utils/FetchMultiSearch.js";
-import { GetTotalAPICall } from "./utils/TotalAPICall.js";
+import { GetTotalAPICallToday, AddTotalAPICall } from "./utils/TotalAPICall.js";
 
 // inisialisasi elemen: kotak pencarian dan tombol search
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
-// get total API call today
-const { totalAPICall, totalAPICallName } = GetTotalAPICall()
 
-if (totalAPICall === null) {
+// get total API call today
+let { totalAPICallToday, totalAPICallNameToday } = GetTotalAPICallToday(false)
+
+if (totalAPICallToday === null) {
   // inisialisasi localstorage
-  localStorage.setItem(totalAPICallName, 0);
-  totalAPICall = localStorage.getItem(totalAPICallName);
+  localStorage.setItem(totalAPICallNameToday, 0);
+  totalAPICallToday = localStorage.getItem(totalAPICallNameToday);
+  totalAPICallToday = parseInt(totalAPICallToday)
+
+  console.warn("Total API calls you are using from every time you executing a single search are now saved for querying limit purposes. We are creating a new save data everyday, starting from 0, so kindly clear your storage for faster browsing experience. Thank you.");
 }
+
+totalAPICallToday = parseInt(totalAPICallToday)
 
 /**
  * Fetch data from API when search btn is onClick
@@ -21,39 +27,47 @@ if (totalAPICall === null) {
  * @returns Promise of all fetched data from the API containing the search results
  */
 searchBtn.onclick = async () => {
+  // 
+  let { totalAPICallToday, totalAPICallNameToday } = GetTotalAPICallToday()
+
+  // 
   if (searchBox.value == false) {
     alert(
       "Please fill the search box with the title of the movie, series, or film."
     );
   } else {
     return Promise.all([
-      fetchMultiSearch(searchBox.value, 1, { totalAPICall, totalAPICallName }),
-      fetchMultiSearch(searchBox.value, 2, { totalAPICall, totalAPICallName }),
+      fetchMultiSearch(searchBox.value, 1),
+      fetchMultiSearch(searchBox.value, 2),
     ])
       .then((arrData) => {
-        const mergedData = [...arrData[0], ...arrData[1]];
-        console.log(mergedData);
+        const totalCallAPI = arrData[0].nCallAPI + arrData[1].nCallAPI
+        const mergedData = [...arrData[0].Search, ...arrData[1].Search];
 
-        mergedData.forEach((movieData, idx) => {
-          document
-            .getElementById("card-wrapper")
-            .insertAdjacentHTML("beforeend", CardSingleSearch(idx, movieData));
+        AddTotalAPICall(totalAPICallNameToday, totalAPICallToday+totalCallAPI)
+        
+        // mergedData.forEach((movieData, idx) => {
+        //   document
+        //     .getElementById("card-wrapper")
+        //     .insertAdjacentHTML("beforeend", CardSingleSearch(idx, movieData));
 
-          if (idx % 5 === 0 || mergedData.length === idx) {
-            document
-              .getElementById(`card-${idx}`)
-              .insertAdjacentHTML(
-                "afterend",
-                CardSeparator(idx, mergedData.length)
-              );
-          }
-        })
+        //   if (idx % 5 === 0 || mergedData.length === idx) {
+        //     document
+        //       .getElementById(`card-${idx}`)
+        //       .insertAdjacentHTML(
+        //         "afterend",
+        //         CardSeparator(idx, mergedData.length)
+        //       );
+        //   }
+        // })
       })
       .catch((err) => {
-        throw new Error(err);
+        alert(err)
+        console.error(new Error(err));
       })
       .finally(() => {
-        console.warn(totalAPICall, "calls today in total");
+        let { totalAPICallToday } = GetTotalAPICallToday()
+        console.warn(totalAPICallToday, `(${typeof(totalAPICallToday)})`, "calls today in total");
       });
   }
 };
