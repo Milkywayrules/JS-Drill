@@ -2,7 +2,7 @@
  *
  * Get total API call has been made today.
  *
- * @returns Object = {totalAPICall, totalAPICallName}
+ * @returns Object = { totalAPICallToday, totalAPICallNameToday }
  */
 export const GetTotalAPICallToday = (isNumber = true) => {
   const totalAPICallNameToday = `totalAPICall#${new Date().toLocaleDateString()}`;
@@ -23,16 +23,14 @@ export const GetTotalAPICallToday = (isNumber = true) => {
   return { totalAPICallToday, totalAPICallNameToday };
 };
 
-/**
- *
- * Add +1 to the localStorage item.
- *
- * @param {any} key Set the key name
- * @param {any} value Set the key value
- * @returns true | throw Error
- */
-export const AddTotalAPICall = (totalAPICallName, totalAPICall) => {
-  // let { totalAPICall, totalAPICallName } = GetTotalAPICall();
-  // console.error(totalAPICall, typeof(totalAPICall));
-  localStorage.setItem(totalAPICallName, totalAPICall);
-};
+// /**
+//  *
+//  * Add +1 to the localStorage item.
+//  *
+//  * @param {any} key Set the key name
+//  * @param {any} value Set the key value
+//  * @returns true | throw Error
+//  */
+// export const AddTotalAPICallToday = (totalAPICallName, totalAPICall) => {
+//   localStorage.setItem(totalAPICallName, totalAPICall);
+// };

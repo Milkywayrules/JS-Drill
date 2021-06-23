@@ -12,7 +12,7 @@ export const CardSingleSearch = (
     imdbRating,
     Rated,
     Plot,
-    imdbID
+    imdbID,
   }
 ) => `
   <div

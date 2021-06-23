@@ -1,8 +1,7 @@
-
-import { ENV } from "../_env.js"
+import { ENV } from "../_env.js";
 
 /**
- * 
+ *
  * Async function to fetch the data from the API (omdbapi.com)
  *
  * @param {any} inputMovieTitle Movie, series, or film title to search here
@@ -23,7 +22,7 @@ export const fetchMultiSearch = async (inputMovieTitle, inputPages = 1) => {
     `${ENV.fullUrl.byTitle}&page=${inputPages}&s=${inputMovieTitle}`
   );
   let json = await res.json();
-  nCallAPI++
+  nCallAPI++;
 
   // if movie is not found, then search again 1x with first page and the same title
   // to ensure that is really the title is not found or the page requested is beyond the limit
@@ -42,7 +41,7 @@ export const fetchMultiSearch = async (inputMovieTitle, inputPages = 1) => {
     // (the api is not that good at handling this, so i got a little bit crazieeee hweeeree)
     res = await fetch(`${ENV.fullUrl.byTitle}&page=1&s=${inputMovieTitle}`);
     json = await res.json();
-    nCallAPI++
+    nCallAPI++;
 
     if (json.Response === "False") {
       return new Promise((resolve, reject) => {
@@ -65,7 +64,7 @@ export const fetchMultiSearch = async (inputMovieTitle, inputPages = 1) => {
       `${ENV.fullUrl.byTitle}&page=${maxPage}&s=${inputMovieTitle}`
     );
     const json = await res.json();
-    nCallAPI++
+    nCallAPI++;
 
     console.info(
       "This is 2x fetching process per page.",
@@ -78,7 +77,7 @@ export const fetchMultiSearch = async (inputMovieTitle, inputPages = 1) => {
     return new Promise((resolve) => {
       resolve({
         Search: json.Search,
-        nCallAPI
+        nCallAPI,
       });
     });
   } else {
@@ -95,7 +94,7 @@ export const fetchMultiSearch = async (inputMovieTitle, inputPages = 1) => {
     return new Promise((resolve) => {
       resolve({
         Search: json.Search,
-        nCallAPI
+        nCallAPI,
       });
     });
   }
