@@ -1,58 +1,85 @@
 import { CardSingleSearch, CardSeparator } from "./components/Component.js";
+import { fetchMultiSearch } from "./utils/FetchMultiSearch.js";
+import { GetTotalAPICall } from "./utils/TotalAPICall.js";
 
 // inisialisasi elemen: kotak pencarian dan tombol search
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
+// get total API call today
+const { totalAPICall, totalAPICallName } = GetTotalAPICall()
 
-// api key dan base url
-const apiKey = "32913f44"; // jangan dipake sembarangan yak, bikin aja akun sendiri di "http://www.omdbapi.com/". GRATIS.
-const baseUrl = `https://www.omdbapi.com/?apikey=${apiKey}`;
-const fullUrl = {
-  base: baseUrl,
-  byTitle: `${baseUrl}`, // page=n ; s=Str
-  byId: `${baseUrl}&plot=full`, //plot=full ; i=Num
+if (totalAPICall === null) {
+  // inisialisasi localstorage
+  localStorage.setItem(totalAPICallName, 0);
+  totalAPICall = localStorage.getItem(totalAPICallName);
 }
 
-// show or hide some element with ID provided
-const shorOrHide = (elName, state) => {
-  if (state === 1) {
-    document.getElementById(elName).classList.remove("d-none");
-    document.getElementById(elName).classList.add("d-block");
+/**
+ * Fetch data from API when search btn is onClick
+ * based on search box value that user input.
+ *
+ * @returns Promise of all fetched data from the API containing the search results
+ */
+searchBtn.onclick = async () => {
+  if (searchBox.value == false) {
+    alert(
+      "Please fill the search box with the title of the movie, series, or film."
+    );
   } else {
-    document.getElementById(elName).classList.remove("d-block");
-    document.getElementById(elName).classList.add("d-none");
+    return Promise.all([
+      fetchMultiSearch(searchBox.value, 1, { totalAPICall, totalAPICallName }),
+      fetchMultiSearch(searchBox.value, 2, { totalAPICall, totalAPICallName }),
+    ])
+      .then((arrData) => {
+        const mergedData = [...arrData[0], ...arrData[1]];
+        console.log(mergedData);
+
+        mergedData.forEach((movieData, idx) => {
+          document
+            .getElementById("card-wrapper")
+            .insertAdjacentHTML("beforeend", CardSingleSearch(idx, movieData));
+
+          if (idx % 5 === 0 || mergedData.length === idx) {
+            document
+              .getElementById(`card-${idx}`)
+              .insertAdjacentHTML(
+                "afterend",
+                CardSeparator(idx, mergedData.length)
+              );
+          }
+        })
+      })
+      .catch((err) => {
+        throw new Error(err);
+      })
+      .finally(() => {
+        console.warn(totalAPICall, "calls today in total");
+      });
   }
 };
 
-// ambil array hasil search aja
-const allSearchData = queryResults.Search;
+// fetchData("zero", 10).then((data) => {
+//   console.log(data);
+// });
 
-allSearchData.forEach((movieData, i) => {
-  i++;
-  document
-    .getElementById("card-wrapper")
-    .insertAdjacentHTML("beforeend", CardSingleSearch(i, movieData));
-  if (idx % 5 === 0 || allSearchData.length === idx) {
-    document
-      .getElementById(`card-${idx}`)
-      .insertAdjacentHTML("afterend", CardSeparator(idx, allSearchData.length));
-  }
-});
+// fetchData("naruto", 1).then((data) => {
+//   console.log(data);
+// });
 
+// // ambil array hasil search aja
+// const allSearchData = queryResults.Search;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// allSearchData.forEach((movieData, i) => {
+//   i++;
+//   document
+//     .getElementById("card-wrapper")
+//     .insertAdjacentHTML("beforeend", CardSingleSearch(i, movieData));
+//   if (idx % 5 === 0 || allSearchData.length === idx) {
+//     document
+//       .getElementById(`card-${idx}`)
+//       .insertAdjacentHTML("afterend", CardSeparator(idx, allSearchData.length));
+//   }
+// });
 
 // (
 //   // // looping sampai i untuk generate array artificial dataset
