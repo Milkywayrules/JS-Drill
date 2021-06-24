@@ -8,6 +8,7 @@ import { GetTotalAPICallToday } from "./utils/TotalAPICall.js";
 import { FetchInfoDetail } from "./utils/FetchInfoDetail.js";
 
 // inisialisasi elemen: kotak pencarian dan tombol search
+const searchForm = document.getElementById("search-form");
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
 const animateSpin = document.querySelector("button svg");
@@ -31,21 +32,14 @@ if (totalAPICallToday === null) {
 
 totalAPICallToday = parseInt(totalAPICallToday);
 
-// add event listener to search box for Enter key
-searchBox.onkeyup = (e) => {
-  if (e.keyCode === 13) {
-    e.preventDefault();
-    searchBtn.click();
-  }
-};
-
 /**
  * Fetch data from API when search btn is onClick
  * based on search box value that user input.
  *
  * @returns Promise of all fetched data from the API containing the search results
  */
-searchBtn.onclick = async () => {
+searchForm.onsubmit = async (e) => {
+  e.preventDefault()
   //
   let { totalAPICallToday, totalAPICallNameToday } = GetTotalAPICallToday();
 
