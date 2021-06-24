@@ -1,4 +1,4 @@
-import { CardSingleSearch } from "./CardSingleSearch.js";
+import { CardSingleSearch, LoadingCardSingleSearch } from "./CardSingleSearch.js";
 import { CardSeparator } from "./CardSeparator.js";
 
-export { CardSingleSearch, CardSeparator };
+export { CardSingleSearch, CardSeparator, LoadingCardSingleSearch };

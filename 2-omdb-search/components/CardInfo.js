@@ -1,6 +1,11 @@
 // yg ini pake if else biar ke-handle ajasi
 // yg component lain mah belom wkwk
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export const CardInfo = ({ Class, TooltipTitle, Svg, TextId, Text }) => {
   return `
       <small

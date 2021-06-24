@@ -15,8 +15,25 @@
     <!-- load css & js -->
     <link rel="stylesheet" href="./style-2.css" />
   </head>
+
   <body class="m-5 bg-gray-900 selection:bg-pink-400 selection:text-white">
     <header class="mt-52 mb-5 flex flex-col lg:mt-40">
+      <a
+        href="/"
+        class="
+          mx-auto
+          -mt-10
+          mb-10
+          text-pink-500
+          font-semibold
+          underline
+          transition-color
+          duration-300
+          hover:text-indigo-500
+        "
+      >
+        Go to home
+      </a>
       <a
         href="./"
         class="
@@ -28,7 +45,8 @@
           duration-300
           hover:text-indigo-500
         "
-        >#2 - OMDB Search
+      >
+        #2 - OMDB Search
       </a>
       <div class="mx-auto mt-8 w-full flex flex-col md:flex-row md:w-96">
         <input
@@ -49,41 +67,66 @@
             disabled:ring-0
           "
         />
-        <button
-          style="outline: none"
-          type="submit"
-          id="search-btn"
-          class="
-            mt-2
-            px-5
-            py-2
-            text-white
-            bg-indigo-500
-            rounded-md
-            ring-indigo-800
-            transition-color
-            duration-300
-            hover:bg-indigo-700
-            active:bg-indigo-500
-            active:ring-4
-            focus:bg-indigo-700
-            focus:ring-4
-            disabled:bg-gray-800
-            disabled:text-gray-500
-            disabled:ring-0
-            disabled:pointer-events-none
-            md:ml-2
-            md:mt-0
-          "
-        >
-          Search
-        </button>
+        <div class="md:ml-2 cursor-not-allowed">
+          <button
+            style="outline: none"
+            type="submit"
+            id="search-btn"
+            class="
+              mt-2
+              px-5
+              py-2
+              flex
+              text-white
+              font-semibold
+              bg-indigo-500
+              rounded-md
+              ring-indigo-800
+              transition-color
+              duration-300
+              hover:bg-indigo-700
+              active:bg-indigo-500
+              active:ring-4
+              focus:bg-indigo-700
+              focus:ring-4
+              disabled:bg-gray-800
+              disabled:text-gray-500
+              disabled:ring-0
+              disabled:pointer-events-none
+              md:mt-0
+            "
+          >
+            <svg
+              class="animate-spin -ml-1 mr-2 my-auto h-4 w-4 text-white hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Search
+          </button>
+        </div>
       </div>
     </header>
 
     <!-- search results section -->
-    <main class="mt-10 flex flex-col gap-5">
-      <h2 class="mx-auto text-white text-xl">Search results</h2>
+    <main class="mt-10 flex flex-col gap-5 hidden">
+      <h2 class="mx-auto text-white text-xl font-semibold" id="info-text">
+        Search results
+      </h2>
 
       <!-- cards wrapper -->
       <div id="card-wrapper" class="flex flex-col gap-3">
