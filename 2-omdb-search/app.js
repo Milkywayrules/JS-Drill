@@ -78,21 +78,22 @@ searchBtn.onclick = async () => {
       fetchMultiSearch(searchBox.value, 2),
     ])
       .then((arrData) => {
-        
-        // update the localStorage
-
+        // counting total API from 2 fetch promises before
         const totalCallAPI = arrData[0].nCallAPI + arrData[1].nCallAPI;
 
+        // update the totalAPICallToday in localStorage
         localStorage.setItem(
           totalAPICallNameToday,
           totalAPICallToday + totalCallAPI
         );
 
+        // merge 2 results array from 2 fetch promises before
         const mergedData = [...arrData[0].Search, ...arrData[1].Search];
-
-        // const mergedImdbID = mergedData.map(data => `${ENV.fullUrl.byId}&i=${data.imdbID}`)
+        // get only the imdbID from mergeData array
         const mergedImdbID = mergedData.map((data) => data.imdbID);
 
+        // return detailed info from every imdbID using FetchInfoDetail
+        // wrapped by Promise.all
         return Promise.all(
           mergedImdbID.map((data) => {
             return FetchInfoDetail(data);
@@ -100,36 +101,11 @@ searchBtn.onclick = async () => {
         );
       })
       .then((allData) => {
-        // 
-        // const cardLoadingWrapper = document.getElementsByClassName("__card-loading-wrapper");
-
-        // console.log(typeof(cardLoadingWrapper), cardLoadingWrapper.length);
-
+        // remove all loading card wrapper,
+        // so the actual card with data are gonna be rendered
         cardWrapper.innerHTML = ''
 
-        // console.log(cardLoadingWrapper[0].remove());
-        // console.log(cardLoadingWrapper[1].remove());
-        // console.log(cardLoadingWrapper[2].remove());
-        // console.log(cardLoadingWrapper[0].remove());
-        // console.log(cardLoadingWrapper[0].remove());
-        
-
-        // cardLoadingWrapper.forEach((item) => {
-        //   cardLoadingWrapper.remove()
-        // })
-
-        // let i = 0
-        // let n = 5
-        // while (n > 0) {
-        //   cardLoadingWrapper
-        //   i++
-        // }
-        
-        // cardLoadingWrapper.forEach((item, i) => {
-        //   item.remove()
-        //   console.log(i, "terhapus");
-        // })
-
+        // render every single card
         let nCallAPI = 0;
         allData.forEach((objData, idx) => {
           idx++;
@@ -180,6 +156,7 @@ searchBtn.onclick = async () => {
         searchBtn.disabled = false;
         searchBtn.innerHTML = "Search";
 
+        // get totalAPICallToday for show tracking in the console
         let { totalAPICallToday } = GetTotalAPICallToday();
         console.warn(
           totalAPICallToday,
@@ -189,51 +166,3 @@ searchBtn.onclick = async () => {
       });
   }
 };
-
-// fetchData("zero", 10).then((data) => {
-//   console.log(data);
-// });
-
-// fetchData("naruto", 1).then((data) => {
-//   console.log(data);
-// });
-
-// // ambil array hasil search aja
-// const allSearchData = queryResults.Search;
-
-// allSearchData.forEach((movieData, i) => {
-//   i++;
-//   document
-//     .getElementById("card-wrapper")
-//     .insertAdjacentHTML("beforeend", CardSingleSearch(i, movieData));
-//   if (idx % 5 === 0 || allSearchData.length === idx) {
-//     document
-//       .getElementById(`card-${idx}`)
-//       .insertAdjacentHTML("afterend", CardSeparator(idx, allSearchData.length));
-//   }
-// });
-
-// (
-//   // // looping sampai i untuk generate array artificial dataset
-//   // const arrs = (n) => {
-//   //   let loops = [];
-//   //   for (let i = 0; i < n; i++) loops.push(i);
-//   //   return loops;
-//   // };
-
-//   // // inisialisasi artifical dataset
-//   // const arrsData = arrs(25);
-
-//   // // render ke html artifical dataset
-//   // arrsData.forEach((_, idx) => {
-//   //   idx++;
-//   //   document
-//   //     .getElementById("card-wrapper")
-//   //     .insertAdjacentHTML("beforeend", CardSingleSearch(idx, data));
-//   //   if (idx % 5 === 0 || arrsData.length === idx) {
-//   //     document
-//   //       .getElementById(`card-${idx}`)
-//   //       .insertAdjacentHTML("afterend", CardSeparator(idx, arrsData.length));
-//   //   }
-//   // });
-// )
