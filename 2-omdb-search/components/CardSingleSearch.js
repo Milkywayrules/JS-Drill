@@ -154,7 +154,7 @@ export const LoadingCardSingleSearch = () => `
   <div class="__card-loading-wrapper max-w-md mx-auto shadow-md overflow-hidden md:max-w-4xl w-full">
     <div class="rounded-xl border-4 border-transparent overflow-hidden transition-color duration-150 hover:border-pink-600 md:flex">
       <!-- image -->
-      <div class="animate-pulse md:flex-shrink-0">
+      <div class="animate-pulse h-96 md:h-[21rem] md:flex-shrink-0">
         <a class="block h-full w-full bg-gray-200/60 md:w-56"></a>
       </div>
 

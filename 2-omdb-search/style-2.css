@@ -676,6 +676,14 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.-mt-10 {
+  margin-top: -2.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -698,18 +706,6 @@ video {
 
 .mt-1 {
   margin-top: 0.25rem;
-}
-
-.-mt-10 {
-  margin-top: -2.5rem;
-}
-
-.-mt-20 {
-  margin-top: -5rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
 }
 
 .block {
@@ -744,6 +740,26 @@ video {
   height: 1.25rem;
 }
 
+.h-64 {
+  height: 16rem;
+}
+
+.h-96 {
+  height: 24rem;
+}
+
+.h-\[48rem\] {
+  height: 48rem;
+}
+
+.h-48 {
+  height: 12rem;
+}
+
+.h-0 {
+  height: 0px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -772,12 +788,20 @@ video {
   width: 33.333333%;
 }
 
+.w-48 {
+  width: 12rem;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
 }
 
 .transform {
@@ -957,21 +981,21 @@ video {
   line-height: 2rem;
 }
 
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
+.font-semibold {
+  font-weight: 600;
 }
 
 .font-bold {
   font-weight: 700;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .leading-tight {
   line-height: 1.25;
+}
+
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
 }
 
 .text-white {
@@ -997,26 +1021,6 @@ video {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgba(55, 65, 81, var(--tw-text-opacity));
-}
-
-.text-pink-500 {
-  --tw-text-opacity: 1;
-  color: rgba(236, 72, 153, var(--tw-text-opacity));
-}
-
-.text-pink-200 {
-  --tw-text-opacity: 1;
-  color: rgba(251, 207, 232, var(--tw-text-opacity));
-}
-
-.text-pink-400 {
-  --tw-text-opacity: 1;
-  color: rgba(244, 114, 182, var(--tw-text-opacity));
-}
-
-.text-pink-300 {
-  --tw-text-opacity: 1;
-  color: rgba(249, 168, 212, var(--tw-text-opacity));
 }
 
 .underline {
@@ -1217,6 +1221,26 @@ video {
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:h-full {
+    height: 100%;
+  }
+
+  .md\:h-80 {
+    height: 20rem;
+  }
+
+  .md\:h-\[20rem\] {
+    height: 20rem;
+  }
+
+  .md\:h-\[22rem\] {
+    height: 22rem;
+  }
+
+  .md\:h-\[21rem\] {
+    height: 21rem;
   }
 
   .md\:w-96 {

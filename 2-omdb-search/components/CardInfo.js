@@ -16,6 +16,7 @@ export const CardInfo = ({ Class, TooltipTitle, Svg, TextId, Text }) => {
           transition-color
           duration-300
           hover:text-indigo-700
+          my-auto
           ${Class}
         "
         title="${TooltipTitle}"

@@ -1,4 +1,8 @@
-import { CardSingleSearch, CardSeparator, LoadingCardSingleSearch } from "./components/Component.js";
+import {
+  CardSingleSearch,
+  CardSeparator,
+  LoadingCardSingleSearch,
+} from "./components/Component.js";
 import { fetchMultiSearch } from "./utils/FetchMultiSearch.js";
 import { GetTotalAPICallToday } from "./utils/TotalAPICall.js";
 import { FetchInfoDetail } from "./utils/FetchInfoDetail.js";
@@ -64,7 +68,7 @@ searchBtn.onclick = async () => {
     searchBox.disabled = true;
     searchBox.classList.add("cursor-not-allowed");
     searchBtn.disabled = true;
-    searchBtn.innerHTML = animateSpin.outerHTML + "Fetching...";
+    searchBtn.getElementsByTagName("span")[0].innerHTML = "Fetching...";
     cardWrapper.innerHTML = "";
     mainEl[0].classList.remove("hidden");
 
@@ -103,7 +107,7 @@ searchBtn.onclick = async () => {
       .then((allData) => {
         // remove all loading card wrapper,
         // so the actual card with data are gonna be rendered
-        cardWrapper.innerHTML = ''
+        cardWrapper.innerHTML = "";
 
         // render every single card
         let nCallAPI = 0;
@@ -114,8 +118,10 @@ searchBtn.onclick = async () => {
 
           let singleData = objData.singleData;
 
-          cardWrapper
-            .insertAdjacentHTML("beforeend", CardSingleSearch(idx, singleData));
+          cardWrapper.insertAdjacentHTML(
+            "beforeend",
+            CardSingleSearch(idx, singleData)
+          );
 
           if (idx % 5 === 0 || allData.length === idx) {
             document
@@ -154,7 +160,7 @@ searchBtn.onclick = async () => {
         searchBox.disabled = false;
         searchBox.classList.remove("cursor-not-allowed");
         searchBtn.disabled = false;
-        searchBtn.innerHTML = "Search";
+        searchBtn.getElementsByTagName("span")[0].innerHTML = "Search";
 
         // get totalAPICallToday for show tracking in the console
         let { totalAPICallToday } = GetTotalAPICallToday();
