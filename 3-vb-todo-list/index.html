@@ -17,20 +17,65 @@
     <link rel="stylesheet" href="./style-3.css" />
   </head>
 
-  <body class="bg-lime-500">
-
-    <header>
-
+  <body class="bg-pink-600">
+    <header class="h-12 bg-pink-100 px-6 shadow-md">
+      <nav class="w-full md:w-2/3 lg:w-1/2 mx-auto h-full flex justify-between">
+        <a href="../" class="my-auto w-10">
+          <img src="../assets/icon/favicon-60.png" alt="Logo" class="p-1 md:p-0 w-full transition duration-300 hover:rotate-12 focus:rotate-12" />
+        </a>
+        <ul class="flex gap-2 my-auto text-indigo-900">
+          <a href="#" class="px-2 md:px-6 py-1 rounded font-semibold transition-color duration-300 hover:-rotate-3 hover:bg-indigo-300 hover:shadow-md focus:-rotate-3 focus:bg-indigo-300 focus:shadow-md"> Menu 1 </a>
+          <a href="#" class="px-2 md:px-6 py-1 rounded font-semibold transition-color duration-300 hover:rotate-3 hover:bg-indigo-300 hover:shadow-md focus:rotate-3 focus:bg-indigo-300 focus:shadow-md"> Menu 2 </a>
+          <a href="#" class="px-2 md:px-6 py-1 rounded font-semibold transition-color duration-300 hover:-rotate-3 hover:bg-indigo-300 hover:shadow-md focus:-rotate-3 focus:bg-indigo-300 focus:shadow-md"> Menu 3 </a>
+        </ul>
+      </nav>
     </header>
 
-    <main>
+    <main class="px-8 lg:px-40">
+      <form id="input-form" class="w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 flex gap-2">
+        <input type="text" name="input-box" id="input-box" placeholder="Got something?" class="w-full py-2 px-4 rounded outline-none text-indigo-900 caret-indigo-500 ring-indigo-300 focus:ring-4 focus:shadow-lg" autofocus required>
+        <button type="submit" name="input-btn" id="input-btn" class="flex py-2 pl-3 pr-4 md:px-14 rounded outline-none bg-indigo-800 text-indigo-50 font-semibold transition-color duration-300 hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg active:bg-indigo-800 active:shadow-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Add
+        </button>
+      </form>
 
+      <section class="w-full md:w-2/3 lg:w-1/2 mx-auto px-2 md:px-4 lg:px-0 lg:w-7/12 mt-8">
+        <h2 class="text-lg text-center text-white font-semibold"> My pretty list </h2>
+
+        <div id="cards-wrapper" class="mt-4 flex flex-col">
+          <!-- To-do list card goes here -->
+          <!-- card-wrapper -->
+          <div id="card-wrapper" class="flex flex-col hover:drop-shadow-xl">
+            <a href="" onclick="event.preventDefault()" class="bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl">
+              <p class="px-5 py-6 text-gray-900">Do something really productive.</p>
+
+              <div class="flex text-center z-10 ">
+                <div class="w-1/2 py-2 rounded-bl bg-gray-100 hover:bg-indigo-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </div>
+
+                <div class="w-1/2 py-2 rounded-br bg-gray-100 hover:bg-red-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </div>
+              </div>
+
+            </a>
+            <div class="h-6 mx-2 z-0 -translate-y-4 bg-gray-300 rounded"></div>
+          </div>
+          <!-- /card-wrapper -->
+        </div>
+      </section>
     </main>
 
-    <footer>
+    <footer></footer>
 
-    </footer>
-
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
