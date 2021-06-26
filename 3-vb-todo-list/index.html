@@ -15,6 +15,7 @@
 
     <!-- load css & js -->
     <link rel="stylesheet" href="./style-3.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body class="bg-pink-600">
@@ -32,28 +33,32 @@
     </header>
 
     <main class="px-8 lg:px-40">
-      <form onsubmit="event.preventDefault()" id="input-form" class="w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 flex gap-2">
-        <input type="text" name="input-box" id="input-box" placeholder="Got something?" class="w-full py-2 px-4 rounded outline-none text-indigo-900 caret-indigo-500 ring-indigo-300 focus:ring-4 focus:shadow-lg" autofocus required>
-        <button type="submit" name="input-btn" id="input-btn" class="flex py-2 pl-3 pr-4 md:px-14 rounded outline-none bg-indigo-800 text-indigo-50 font-semibold transition-color duration-300 hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg active:bg-indigo-800 active:shadow-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <form id="input-form" class="w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 flex gap-2">
+        <input type="text" name="input-box" id="input-box" placeholder="Got something?" class="w-full py-2 px-4 rounded outline-none text-indigo-900 caret-indigo-500 ring-indigo-300 focus:ring-4 focus:shadow-lg disabled:bg-gray-500 disabled:text-indigo-50 disabled:cursor-not-allowed" autofocus required>
+        <button type="submit" name="input-btn" id="input-btn" class="flex py-2 pl-3 pr-4 md:px-14 rounded outline-none bg-indigo-800 text-indigo-50 font-semibold transition-color duration-300 hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg active:bg-indigo-800 active:shadow-none disabled:bg-gray-500 disabled:cursor-not-allowed">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 my-auto mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          Add
+          <span class="mb-1 lg:mb-0"> Add </span>
         </button>
       </form>
 
       <section class="w-full md:w-2/3 lg:w-1/2 mx-auto lg:w-7/12 mt-8">
         <h2 class="text-lg text-center text-white font-semibold"> My pretty list </h2>
 
-        <div id="cards-wrapper" class="mt-4 flex flex-col">
+        <div id="cards-wrapper" class="mt-4 flex flex-col gap-1">
           <!-- To-do list card goes here -->
+
+
+
           <!-- card-wrapper -->
-          <div id="card-wrapper" class="flex flex-col hover:drop-shadow-xl">
-            <button id="card-it" class="bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl">
-              <div class="flex flex-col lg:flex-row">
-                <p class="px-5 py-6 text-left text-gray-900 w-11/12">Do something really productive today and forever ever ever dah.</p>
+          <div id="123123-cardWrapperOuter" data-id="123123" class="flex flex-col drop-shadow-lg hover:drop-shadow-xl">
+            <button id="123123-cardWrapper" data-card-wrapper="123123" class="bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl">
+              
+              <div id="123123-textWrapper" class="flex flex-col lg:flex-row">
+                <p id="123123-text" class="w-full px-5 py-6 text-left text-gray-900 lg:w-11/12">Do something really productive today and forever ever ever dah.</p>
                 <!-- check done btn -->
-                <div class="w-full lg:w-2/12 lg:w-1/12 py-2 lg:py-6 rounded-r bg-green-100 lg:bg-green-50 flex items-center hover:bg-green-100 border-b-2 border-green-300 lg:border-b-0 lg:border-l-4 lg:border-green-300">
+                <div id="123123-check" data-check-wrapper="123123" class="shadow-inner w-full lg:w-2/12 lg:w-1/12 py-2 lg:py-6 rounded-r bg-green-100 lg:bg-green-50 flex items-center active:bg-green-200 lg:hover:bg-green-100 border-b-2 border-green-300 lg:border-b-0 lg:border-l-4 lg:border-green-300 hidden">
                   <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
@@ -61,9 +66,9 @@
                 <!-- /check done btn -->
               </div>
 
-              <div class="flex text-center z-10 ">
+              <div id="123123-modifyWrapper" data-modify-wrapper="123123" class="flex text-center z-10 hidden">
                 <!-- edit btn -->
-                <div class="w-1/2 py-2 rounded-bl bg-gray-100 hover:bg-indigo-200 shadow-inner">
+                <div id="123123-edit" class="w-1/2 py-2 rounded-bl bg-gray-100 hover:bg-indigo-200 active:bg-indigo-200 shadow-inner">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
@@ -71,7 +76,7 @@
                 <!-- /edit btn -->
 
                 <!-- delete btn -->
-                <div class="w-1/2 py-2 rounded-br bg-gray-100 hover:bg-red-200 shadow-inner">
+                <div id="123123-delete" class="w-1/2 py-2 rounded-br bg-gray-100 hover:bg-red-200 active:bg-red-200 shadow-inner">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
@@ -80,9 +85,52 @@
               </div>
 
             </button>
-            <div class="h-6 mx-2 z-0 -translate-y-4 bg-gray-300 rounded"></div>
+            <div id="123123-cardBottom" class="h-6 mx-2 z-0 -translate-y-4 bg-gray-300 rounded"></div>
           </div>
           <!-- /card-wrapper -->
+
+
+          
+          <!-- card-wrapper -->
+          <div id="696969-cardWrapperOuter" data-id="696969" class="flex flex-col drop-shadow-lg hover:drop-shadow-xl">
+            <button id="696969-cardWrapper" data-card-wrapper="696969" class="bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl">
+              
+              <div id="696969-textWrapper" class="flex flex-col lg:flex-row">
+                <p id="696969-text" class="w-full px-5 py-6 text-left text-gray-900 lg:w-11/12">Do something really productive today and forever ever ever dah.</p>
+                <!-- check done btn -->
+                <div id="696969-check" data-check-wrapper="696969" class="w-full lg:w-2/12 lg:w-1/12 py-2 lg:py-6 rounded-r bg-green-100 lg:bg-green-50 flex items-center active:bg-green-200 lg:hover:bg-green-100 border-b-2 border-green-300 lg:border-b-0 lg:border-l-4 lg:border-green-300 hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <!-- /check done btn -->
+              </div>
+
+              <div id="696969-modifyWrapper" data-modify-wrapper="696969" class="flex text-center z-10 hidden">
+                <!-- edit btn -->
+                <div id="696969-edit" class="w-1/2 py-2 rounded-bl bg-gray-100 hover:bg-indigo-200 active:bg-indigo-200 shadow-inner">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </div>
+                <!-- /edit btn -->
+
+                <!-- delete btn -->
+                <div id="696969-delete" class="w-1/2 py-2 rounded-br bg-gray-100 hover:bg-red-200 active:bg-red-200 shadow-inner">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </div>
+                <!-- /delete btn -->
+              </div>
+
+            </button>
+            <div id="696969-cardBottom" class="h-6 mx-2 z-0 -translate-y-4 bg-gray-300 rounded"></div>
+          </div>
+          <!-- /card-wrapper -->
+
+
+
         </div>
       </section>
     </main>
