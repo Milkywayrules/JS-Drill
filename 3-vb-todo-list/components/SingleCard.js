@@ -6,7 +6,7 @@
  * @returns HTML template string
  */
 export const SingleCard = ({ cardID, cardStatus, todoText }) => {
-  let greenClass = " bg-green-100 border-green-300 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
+  let greenClass = " bg-green-100 border-green-300 hover:bg-green-200 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
   let redClass = " bg-red-100 border-red-300 lg:bg-red-50 lg:hover:bg-red-100 active:bg-red-200 "
 
   let checkSVG = `
