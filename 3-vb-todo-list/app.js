@@ -1,5 +1,6 @@
 import { createCardHTML, assignCardListener } from "./utils/CardUtils.js";
 
+const deleteAllTodosBtn = document.getElementById("delete-all-todos-btn")
 // 
 const inputForm = document.getElementById("input-form");
 const inputBox = document.getElementById("input-box");
@@ -9,7 +10,16 @@ const cardsWrapper = document.getElementById("cards-wrapper");
 // const arrayOfCards = Array.prototype.slice.call(cardsWrapper.children);
 
 
-
+deleteAllTodosBtn.onclick = () => {
+  const x = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
+  if (x === "yes") {
+    localStorage.clear();
+    cardsWrapper.innerHTML = ''
+    alert("All your To-do(s) has been deleted.")
+  } else {
+    alert("All your To-do(s) are safe.")
+  }
+}
 
 // 
 if (localStorage.getItem("myTodoList")) {
@@ -57,7 +67,6 @@ if (localStorage.getItem("myTodoList")) {
  */
 inputForm.onsubmit = (e) => {
   e.preventDefault();
-
   inputBox.disabled = true;
   inputBtn.disabled = true;
 
@@ -91,14 +100,13 @@ inputForm.onsubmit = (e) => {
     localStorage.setItem("myTodoList", JSON.stringify([toSave]));
   }
 
+  const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, todoText:toSave.text })
+  
+  assignCardListener([cardWrapperOuter])
   // 
   inputBox.value = ''
   inputBox.disabled = false;
   inputBtn.disabled = false;
-
-  const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, todoText:toSave.text })
-
-  assignCardListener([cardWrapperOuter])
 
 };
 // End of onSubmit
