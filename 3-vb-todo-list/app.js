@@ -9,11 +9,17 @@ const inputBtn = document.getElementById("input-btn");
 const cardsWrapper = document.getElementById("cards-wrapper");
 // const arrayOfCards = Array.prototype.slice.call(cardsWrapper.children);
 
-
+/**
+ * 
+ * Delete all to-do list item from localStorage "myTodoList".
+ * 
+ */
 deleteAllTodosBtn.onclick = () => {
-  const x = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
-  if (x === "yes") {
-    localStorage.clear();
+  const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
+  if (deletionConfirm === "yes") {
+    // remove all to-do lists
+    localStorage.removeItem('myTodoList');
+    // set HTML card to empty string
     cardsWrapper.innerHTML = ''
     alert("All your To-do(s) has been deleted.")
   } else {
@@ -21,7 +27,7 @@ deleteAllTodosBtn.onclick = () => {
   }
 }
 
-// 
+// get all to-do(s) and render all the to-do(s) list card then assign listener
 if (localStorage.getItem("myTodoList")) {
   try {
     // 
@@ -30,7 +36,7 @@ if (localStorage.getItem("myTodoList")) {
     console.log(myTodoLists.length);
     // 
     myTodoLists.forEach(myTodoList => {
-      const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:myTodoList.ID, todoText:myTodoList.text })
+      const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:myTodoList.ID, cardStatus:myTodoList.status, todoText:myTodoList.text })
       assignCardListener([cardWrapperOuter])
     });
     
@@ -40,9 +46,6 @@ if (localStorage.getItem("myTodoList")) {
       "There was an error with the data. Please clear up your browser local storage. Thank you."
     );
   }
-} else {
-  // 
-  // localStorage.setItem("myTodoList", JSON.stringify([toSave]));
 }
 
 
@@ -85,10 +88,18 @@ inputForm.onsubmit = (e) => {
     try {
       // 
       const localStorageTodo = JSON.parse(localStorage.getItem("myTodoList"));
-      localStorage.setItem(
-        "myTodoList",
-        JSON.stringify([...localStorageTodo, toSave])
-      );
+
+      // set max todos
+      const maxTodos = 100
+      // check todos already in the localStorage not greater than the maxTodos
+      if (localStorageTodo.length < maxTodos) {        
+        localStorage.setItem(
+          "myTodoList",
+          JSON.stringify([...localStorageTodo, toSave])
+        );
+      } else {
+        alert(`You already have ${localStorageTodo.length} to-dos active. Please delete some or clear all to-dos. (Max. ${maxTodos} to-dos for the sake of your device's memory goodness)`)
+      }
     } catch (e) {
       // 
       alert(
@@ -100,13 +111,15 @@ inputForm.onsubmit = (e) => {
     localStorage.setItem("myTodoList", JSON.stringify([toSave]));
   }
 
-  const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, todoText:toSave.text })
+  console.log(toSave);
+  const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, cardStatus:toSave.status, todoText:toSave.text })
   
   assignCardListener([cardWrapperOuter])
   // 
   inputBox.value = ''
   inputBox.disabled = false;
   inputBtn.disabled = false;
+  inputBox.focus()
 
 };
 // End of onSubmit

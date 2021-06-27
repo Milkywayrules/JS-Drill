@@ -1,4 +1,4 @@
-import { SingleCard } from "../components/SingleCard.js";
+import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
 
 /**
  * 
@@ -10,9 +10,9 @@ import { SingleCard } from "../components/SingleCard.js";
  * @param {Object} param0 contains cardID and to-do text
  * @returns { cardID, cardWrapperOuter }
  */
- function createCardHTML({ cardsWrapper, cardID, todoText }) {
+ function createCardHTML({ cardsWrapper, cardID, cardStatus, todoText }) {
   //  create card html without to-do text
-  cardsWrapper.insertAdjacentHTML("afterbegin", SingleCard({ cardID }))
+  cardsWrapper.insertAdjacentHTML("afterbegin", SingleCard({ cardID, cardStatus, todoText }))
   // get to-do text element <p></p>
   const cardTodoTextEl = document.getElementById(`${cardID}-text`)
   // set innerText of to-do
@@ -61,20 +61,24 @@ import { SingleCard } from "../components/SingleCard.js";
     const _ = {};
     // 1 - cardWrapper holds 2 children: textWrapper and modifyWrapper -> btn
     _.cardWrapper = cardWrapperOuter.children[`${cardID}-cardWrapper`];
-    // 1.1 - textWrapper holds 2 children: text and check btn
-    _.textWrapper = _.cardWrapper.children[`${cardID}-textWrapper`];
-    // 1.1.1 - this is the actual text content
-    _.todoText = _.textWrapper.children[`${cardID}-todoText`];
-    // 1.1.2 - this is the check btn (green) -> btn-like
-    _.checkBtn = _.textWrapper.children[`${cardID}-check`];
-    // 1.2 - modifyWrapper holds 2 children: edit btn and delete btn
-    _.modifyWrapper = _.cardWrapper.children[`${cardID}-modifyWrapper`];
-    // 1.2.1 - this is the edit btn (indigo) -> btn-like
-    _.editBtn = _.modifyWrapper.children[`${cardID}-edit`];
-    // 1.2.2 - this is the delete btn (red) -> btn-like
-    _.deleteBtn = _.modifyWrapper.children[`${cardID}-delete`];
+      // 1.1 - textWrapper holds 2 children: text and check btn
+      _.textWrapper = _.cardWrapper.children[`${cardID}-textWrapper`];
+        // 1.1.1 - this is the actual text content
+        _.todoText = _.textWrapper.children[`${cardID}-text`];
+        // 1.1.2 - this is the check btn (green) -> btn-like
+        _.checkBtn = _.textWrapper.children[`${cardID}-check`];
+        // 1.1.3 - this is the cross btn (red) -> btn-like
+        _.crossBtn = _.textWrapper.children[`${cardID}-cross`];
+      // 1.2 - modifyWrapper holds 2 children: edit btn and delete btn
+      _.modifyWrapper = _.cardWrapper.children[`${cardID}-modifyWrapper`];
+        // 1.2.1 - this is the edit btn (indigo) -> btn-like
+        _.editBtn = _.modifyWrapper.children[`${cardID}-edit`];
+        // 1.2.2 - this is the delete btn (red) -> btn-like
+        _.deleteBtn = _.modifyWrapper.children[`${cardID}-delete`];
     // 2 - cardBottom don't have any child, only for accent below every card
     _.cardBottom = cardWrapperOuter.children[`${cardID}-cardBottom`];
+
+    console.log(cardID, _.crossBtn, _.checkBtn);
 
     /**
      * 
@@ -84,7 +88,9 @@ import { SingleCard } from "../components/SingleCard.js";
     _.cardWrapper.addEventListener("focusin", () => {
       console.log(`#${cardID}:`, "cardWrapper: focus in");
       clickState = 0;
-      _.checkBtn.classList.remove("hidden");
+      _.checkBtn.classList.replace("hidden", "block");
+      // _.checkBtn.classList.remove("hidden");
+      // _.checkBtn.classList.add("block");
       _.modifyWrapper.classList.remove("hidden");
       _.cardBottom.classList.add("hidden");
       cardWrapperOuter.classList.add("mb-5");
@@ -99,25 +105,83 @@ import { SingleCard } from "../components/SingleCard.js";
       };
     });
 
+
+
+
+
+
+
     /**
      * when the card is out of focus after being focus
      */
     _.cardWrapper.addEventListener("focusout", () => {
       console.log(`#${cardID}:`, "cardWrapper: focus out");
-      _.checkBtn.classList.add("hidden");
+      if (cardID) {
+        
+      }
+      _.checkBtn.classList.replace("block", "hidden");
+      // _.checkBtn.classList.add("hidden");
+      // _.checkBtn.classList.remove("block");
       _.modifyWrapper.classList.add("hidden");
       _.cardBottom.classList.remove("hidden");
       cardWrapperOuter.classList.remove("mb-5");
     });
+
+
+
+
+
+
+
 
     /**
      * when check btn is clicked
      * edit status in localStorage reference to cardID
      */
     _.checkBtn.addEventListener("click", () => {
-      console.log(`#${cardID}:`, "check");
-      alert("check");
+      // ambil semua data di dalam 1 array
+      // cek ID dari kartu yg diklik dengan ID dari data array di localstorage
+      // 
+      const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
+
+      myTodoLists.forEach((myTodoList) => {
+        if (myTodoList.ID == cardID) {
+          myTodoList.status = 1
+          // console.log(myTodoList);
+        }
+      })
+
+      localStorage.setItem("myTodoList", JSON.stringify(myTodoLists))
+
+      console.log(myTodoLists);
+
+      _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
+      _.todoText.classList.add("line-through")
+      
+      _.checkBtn.classList.replace("block", "hidden")
+      _.crossBtn.classList.replace("hidden", "block")
+
+      console.log(_.crossBtn);
+
+      alert(`[DONE] #${cardID} ~ ${_.todoText.innerText}`);
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * when edit btn is clicked
