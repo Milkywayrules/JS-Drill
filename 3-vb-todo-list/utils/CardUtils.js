@@ -10,9 +10,9 @@ import { SingleCard } from "../components/SingleCard.js";
  * @param {Object} param0 contains cardID and to-do text
  * @returns { cardID, cardWrapperOuter }
  */
- function createCardHTML({ allCardWrapper, cardID, todoText }) {
+ function createCardHTML({ cardsWrapper, cardID, todoText }) {
   //  create card html without to-do text
-  allCardWrapper.insertAdjacentHTML("afterbegin", SingleCard({ cardID }))
+  cardsWrapper.insertAdjacentHTML("afterbegin", SingleCard({ cardID }))
   // get to-do text element <p></p>
   const cardTodoTextEl = document.getElementById(`${cardID}-text`)
   // set innerText of to-do
@@ -25,16 +25,17 @@ import { SingleCard } from "../components/SingleCard.js";
     cardWrapperOuter
    }
 }
+// end of createCardHTML
 
 /**
- * altho we can do this to add listener to every single card from it's parent (allCardWrapper)
+ * altho we can do this to add listener to every single card from it's parent (cardsWrapper)
  * see ref: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_delegation
  *
  *
- *| allCardWrapper.addEventListener("focusin", () => {
+ *| cardsWrapper.addEventListener("focusin", () => {
  *|   console.log('cardWrapper: focus in');
  *| })
- *| allCardWrapper.addEventListener("focusout", () => {
+ *| cardsWrapper.addEventListener("focusout", () => {
  *|   console.log('cardWrapper: focus out');
  *| })
  *
@@ -138,6 +139,7 @@ import { SingleCard } from "../components/SingleCard.js";
   });
   // End of array of card forEach
 }
+// end of assignCardListener
 
 
 export { createCardHTML, assignCardListener }

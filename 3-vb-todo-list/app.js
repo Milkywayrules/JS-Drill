@@ -5,8 +5,39 @@ const inputForm = document.getElementById("input-form");
 const inputBox = document.getElementById("input-box");
 const inputBtn = document.getElementById("input-btn");
 // Contains all children element on the cards-wrapper, then cast Obj to Arr
-const allCardWrapper = document.getElementById("cards-wrapper");
-const arrayOfCards = Array.prototype.slice.call(allCardWrapper.children);
+const cardsWrapper = document.getElementById("cards-wrapper");
+// const arrayOfCards = Array.prototype.slice.call(cardsWrapper.children);
+
+
+
+
+// 
+if (localStorage.getItem("myTodoList")) {
+  try {
+    // 
+    const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
+
+    console.log(myTodoLists.length);
+    // 
+    myTodoLists.forEach(myTodoList => {
+      const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:myTodoList.ID, todoText:myTodoList.text })
+      assignCardListener([cardWrapperOuter])
+    });
+    
+  } catch (e) {
+    // 
+    alert(
+      "There was an error with the data. Please clear up your browser local storage. Thank you."
+    );
+  }
+} else {
+  // 
+  // localStorage.setItem("myTodoList", JSON.stringify([toSave]));
+}
+
+
+
+
 
 /**
  * disable input box and btn
@@ -32,10 +63,10 @@ inputForm.onsubmit = (e) => {
 
   // initialize toSave object contains key=>value for the to-do list
   const toSave = {};
-  // get the to-do value from input box
-  toSave.text = inputBox.value;
   // create unique ID from timestamp + 2 digits number
   toSave.ID = Date.now() + ~~(Math.random() * 100);
+  // get the to-do value from input box
+  toSave.text = inputBox.value;
   // set status 0|1 ; 0 = not done yet, 1 = done
   toSave.status = 0;
 
@@ -47,7 +78,7 @@ inputForm.onsubmit = (e) => {
       const localStorageTodo = JSON.parse(localStorage.getItem("myTodoList"));
       localStorage.setItem(
         "myTodoList",
-        JSON.stringify([toSave, ...localStorageTodo])
+        JSON.stringify([...localStorageTodo, toSave])
       );
     } catch (e) {
       // 
@@ -61,14 +92,15 @@ inputForm.onsubmit = (e) => {
   }
 
   // 
+  inputBox.value = ''
   inputBox.disabled = false;
   inputBtn.disabled = false;
 
-  const { cardWrapperOuter } = createCardHTML({ allCardWrapper, cardID:toSave.ID, todoText:toSave.text })
+  const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, todoText:toSave.text })
 
   assignCardListener([cardWrapperOuter])
 
 };
-// End of onSumbit
+// End of onSubmit
 
 
