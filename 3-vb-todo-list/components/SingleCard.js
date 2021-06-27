@@ -5,19 +5,25 @@
  * @returns HTML Template string
  */
 export const SingleCard = ({ cardID, cardStatus, todoText }) => {
-  // const checkOrCrossEl = parseInt(cardStatus) ? crossUndoneBtn(cardID) : checkDoneBtn(cardID)
-  let a
-  let b
+  let greenClass = " bg-green-100 border-green-300 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
+  let redClass = " bg-red-100 border-red-300 lg:bg-red-50 lg:hover:bg-red-100 active:bg-red-200 "
 
-  if (parseInt(cardStatus)) {
-    // cardStatus == 1, berarti udah beres, tampilin crossUndoneBtn
-    a = crossUndoneBtn(cardID, "block")
-    b = checkDoneBtn(cardID, "hidden")
-  } else {
-    // cardStatus == 0, berarti belom udah beres, tampilin checkDoneBtn
-    a = crossUndoneBtn(cardID, "hidden")
-    b = checkDoneBtn(cardID, "block")
-  }
+  let checkSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+  `;
+  let crossSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  `;
+  
+  cardStatus = parseInt(cardStatus)
+  
+  const checkOrCross = cardStatus ? "Cross undone button" : "Check done button"
+  const injectedSVG = cardStatus ? crossSVG : checkSVG
+  const injectedClass = cardStatus ? redClass : greenClass
 
   return `
     <!-- card-wrapper -->
@@ -28,8 +34,15 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
           <p id="${cardID}-text" class="w-full px-5 py-6 text-left text-gray-900 lg:w-11/12">
             Auto-generated temporary To-do.
           </p>
-          ${a}
-          ${b}
+          <!-- checkOrCross done btn -->
+          <div
+            id="${cardID}-checkOrCross"
+            class="flex w-full py-2 items-center shadow-inner border-b-2 lg:w-2/12 lg:w-1/12 lg:py-6 lg:rounded-r lg:border-b-0 lg:border-l-4 ${injectedClass}"
+            title="${checkOrCross}"
+          >
+            ${injectedSVG}
+          </div>
+          <!-- /checkOrCross done btn -->
         </div>
 
         <div id="${cardID}-modifyWrapper" class="flex text-center z-10 hidden">

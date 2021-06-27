@@ -88,9 +88,22 @@ import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
     _.cardWrapper.addEventListener("focusin", () => {
       console.log(`#${cardID}:`, "cardWrapper: focus in");
       clickState = 0;
-      _.checkBtn.classList.replace("hidden", "block");
-      // _.checkBtn.classList.remove("hidden");
-      // _.checkBtn.classList.add("block");
+      // console.log('1');
+      // if (_.checkBtn) {
+      //   console.log('2');
+      //   _.checkBtn.classList.replace("hidden", "block");
+      //   // _.checkBtn.classList.remove("hidden");
+      //   // _.checkBtn.classList.add("block");
+      // } else if (_.crossBtn) {
+      //   console.log('3');
+      //   _.checkBtn.classList.replace("hidden", "block");
+      //   // _.checkBtn.classList.remove("hidden");
+      //   // _.checkBtn.classList.add("block");
+      // } else {
+      //   console.log('4');
+      //   throw new Error("check btn dan cross btn gaada euy")
+      // }
+      // console.log('5');
       _.modifyWrapper.classList.remove("hidden");
       _.cardBottom.classList.add("hidden");
       cardWrapperOuter.classList.add("mb-5");
@@ -138,33 +151,33 @@ import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
      * when check btn is clicked
      * edit status in localStorage reference to cardID
      */
-    _.checkBtn.addEventListener("click", () => {
-      // ambil semua data di dalam 1 array
-      // cek ID dari kartu yg diklik dengan ID dari data array di localstorage
-      // 
-      const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
+    // _.checkBtn.addEventListener("click", () => {
+    //   // ambil semua data di dalam 1 array
+    //   // cek ID dari kartu yg diklik dengan ID dari data array di localstorage
+    //   // 
+    //   const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
 
-      myTodoLists.forEach((myTodoList) => {
-        if (myTodoList.ID == cardID) {
-          myTodoList.status = 1
-          // console.log(myTodoList);
-        }
-      })
+    //   myTodoLists.forEach((myTodoList) => {
+    //     if (myTodoList.ID == cardID) {
+    //       myTodoList.status = 1
+    //       // console.log(myTodoList);
+    //     }
+    //   })
 
-      localStorage.setItem("myTodoList", JSON.stringify(myTodoLists))
+    //   localStorage.setItem("myTodoList", JSON.stringify(myTodoLists))
 
-      console.log(myTodoLists);
+    //   console.log(myTodoLists);
 
-      _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
-      _.todoText.classList.add("line-through")
+    //   _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
+    //   _.todoText.classList.add("line-through")
       
-      _.checkBtn.classList.replace("block", "hidden")
-      _.crossBtn.classList.replace("hidden", "block")
+    //   _.checkBtn.classList.replace("block", "hidden")
+    //   _.crossBtn.classList.replace("hidden", "block")
 
-      console.log(_.crossBtn);
+    //   console.log(_.crossBtn);
 
-      alert(`[DONE] #${cardID} ~ ${_.todoText.innerText}`);
-    });
+    //   alert(`[DONE] #${cardID} ~ ${_.todoText.innerText}`);
+    // });
 
 
 

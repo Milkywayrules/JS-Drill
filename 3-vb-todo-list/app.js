@@ -42,6 +42,7 @@ if (localStorage.getItem("myTodoList")) {
     
   } catch (e) {
     // 
+    console.log(e);
     alert(
       "There was an error with the data. Please clear up your browser local storage. Thank you."
     );
@@ -102,6 +103,7 @@ inputForm.onsubmit = (e) => {
       }
     } catch (e) {
       // 
+      console.log(e);
       alert(
         "There was an error with the data. Please clear up your browser local storage. Thank you."
       );
