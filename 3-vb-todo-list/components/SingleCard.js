@@ -1,8 +1,9 @@
 /**
- *
+ * 
  * Single card HTML for to-do list.
- *
- * @returns HTML Template string
+ * 
+ * @param {Object} param0 CardID, to-do status, to-do text
+ * @returns HTML template string
  */
 export const SingleCard = ({ cardID, cardStatus, todoText }) => {
   let greenClass = " bg-green-100 border-green-300 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
@@ -37,7 +38,7 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
           <!-- checkOrCross done btn -->
           <div
             id="${cardID}-checkOrCross"
-            class="flex w-full py-2 items-center shadow-inner border-b-2 lg:w-2/12 lg:w-1/12 lg:py-6 lg:rounded-r lg:border-b-0 lg:border-l-4 ${injectedClass}"
+            class="flex w-full py-2 items-center shadow-inner border-b-2 lg:w-2/12 lg:w-1/12 lg:py-6 lg:rounded-r lg:border-b-0 lg:border-l-4 hidden ${injectedClass}"
             title="${checkOrCross}"
           >
             ${injectedSVG}
@@ -71,24 +72,24 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
 };
 
 
-const checkDoneBtn = (cardID, isShown = "block") => `
-  <!-- check done btn -->
-  <div id="${cardID}-check" class="flex w-full py-2 items-center bg-green-100 shadow-inner border-b-2 border-green-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-green-50 lg:hover:bg-green-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-green-200 ${isShown}" title="Check done button">
-    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-  <!-- /check done btn -->
-`;
+// const checkDoneBtn = (cardID, isShown = "block") => `
+//   <!-- check done btn -->
+//   <div id="${cardID}-check" class="flex w-full py-2 items-center bg-green-100 shadow-inner border-b-2 border-green-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-green-50 lg:hover:bg-green-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-green-200 ${isShown}" title="Check done button">
+//     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+//     </svg>
+//   </div>
+//   <!-- /check done btn -->
+// `;
 
-export const crossUndoneBtn = (cardID, isShown = "block") => `
-  <!-- cross undone btn -->
-  <div id="${cardID}-cross" class="flex w-full py-2 items-center bg-red-100 shadow-inner border-b-2 border-red-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-red-50 lg:hover:bg-red-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-red-200 ${isShown}" title="Cross undone button">
-    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </div>
-  <!-- /cross undone btn -->
-`;
+// const crossUndoneBtn = (cardID, isShown = "block") => `
+//   <!-- cross undone btn -->
+//   <div id="${cardID}-cross" class="flex w-full py-2 items-center bg-red-100 shadow-inner border-b-2 border-red-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-red-50 lg:hover:bg-red-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-red-200 ${isShown}" title="Cross undone button">
+//     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+//     </svg>
+//   </div>
+//   <!-- /cross undone btn -->
+// `;
 
 

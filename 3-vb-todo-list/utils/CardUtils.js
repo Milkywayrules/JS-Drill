@@ -1,4 +1,4 @@
-import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
+import { SingleCard } from "../components/SingleCard.js";
 
 /**
  * 
@@ -66,9 +66,7 @@ import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
         // 1.1.1 - this is the actual text content
         _.todoText = _.textWrapper.children[`${cardID}-text`];
         // 1.1.2 - this is the check btn (green) -> btn-like
-        _.checkBtn = _.textWrapper.children[`${cardID}-check`];
-        // 1.1.3 - this is the cross btn (red) -> btn-like
-        _.crossBtn = _.textWrapper.children[`${cardID}-cross`];
+        _.checkOrCrossBtn = _.textWrapper.children[`${cardID}-checkOrCross`];
       // 1.2 - modifyWrapper holds 2 children: edit btn and delete btn
       _.modifyWrapper = _.cardWrapper.children[`${cardID}-modifyWrapper`];
         // 1.2.1 - this is the edit btn (indigo) -> btn-like
@@ -78,116 +76,41 @@ import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
     // 2 - cardBottom don't have any child, only for accent below every card
     _.cardBottom = cardWrapperOuter.children[`${cardID}-cardBottom`];
 
-    console.log(cardID, _.crossBtn, _.checkBtn);
-
     /**
      * 
      */
-    let clickState;
     // when the card is focus, whether clicked or tabbed
     _.cardWrapper.addEventListener("focusin", () => {
-      console.log(`#${cardID}:`, "cardWrapper: focus in");
-      clickState = 0;
-      // console.log('1');
-      // if (_.checkBtn) {
-      //   console.log('2');
-      //   _.checkBtn.classList.replace("hidden", "block");
-      //   // _.checkBtn.classList.remove("hidden");
-      //   // _.checkBtn.classList.add("block");
-      // } else if (_.crossBtn) {
-      //   console.log('3');
-      //   _.checkBtn.classList.replace("hidden", "block");
-      //   // _.checkBtn.classList.remove("hidden");
-      //   // _.checkBtn.classList.add("block");
-      // } else {
-      //   console.log('4');
-      //   throw new Error("check btn dan cross btn gaada euy")
-      // }
-      // console.log('5');
+      // 
+      const focusTimestamp = parseInt(Date.now()/1000)
+      // toggle from hidden to block -> show
+      _.checkOrCrossBtn.classList.replace("hidden", "block");
+      // 
       _.modifyWrapper.classList.remove("hidden");
       _.cardBottom.classList.add("hidden");
       cardWrapperOuter.classList.add("mb-5");
 
-      // when clicked on card while the card is focus, dismiss the unnecessary
+      // 
       _.cardWrapper.onclick = () => {
-        if (clickState != 0) {
-          console.log(`#${cardID}:`, "cardWrapper: click while focus then blur");
-          _.cardWrapper.blur();
+        // 
+        const clickTimestamp = parseInt(Date.now()/1000)
+        if (focusTimestamp != clickTimestamp) {
+          _.cardWrapper.blur()
         }
-        clickState = 1;
       };
     });
-
-
-
-
-
-
 
     /**
      * when the card is out of focus after being focus
      */
     _.cardWrapper.addEventListener("focusout", () => {
-      console.log(`#${cardID}:`, "cardWrapper: focus out");
-      if (cardID) {
-        
-      }
-      _.checkBtn.classList.replace("block", "hidden");
-      // _.checkBtn.classList.add("hidden");
-      // _.checkBtn.classList.remove("block");
+      // toggle from block to hidden -> hide
+      _.checkOrCrossBtn.classList.replace("block", "hidden");
+      // 
       _.modifyWrapper.classList.add("hidden");
       _.cardBottom.classList.remove("hidden");
       cardWrapperOuter.classList.remove("mb-5");
     });
-
-
-
-
-
-
-
-
-    /**
-     * when check btn is clicked
-     * edit status in localStorage reference to cardID
-     */
-    // _.checkBtn.addEventListener("click", () => {
-    //   // ambil semua data di dalam 1 array
-    //   // cek ID dari kartu yg diklik dengan ID dari data array di localstorage
-    //   // 
-    //   const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
-
-    //   myTodoLists.forEach((myTodoList) => {
-    //     if (myTodoList.ID == cardID) {
-    //       myTodoList.status = 1
-    //       // console.log(myTodoList);
-    //     }
-    //   })
-
-    //   localStorage.setItem("myTodoList", JSON.stringify(myTodoLists))
-
-    //   console.log(myTodoLists);
-
-    //   _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
-    //   _.todoText.classList.add("line-through")
-      
-    //   _.checkBtn.classList.replace("block", "hidden")
-    //   _.crossBtn.classList.replace("hidden", "block")
-
-    //   console.log(_.crossBtn);
-
-    //   alert(`[DONE] #${cardID} ~ ${_.todoText.innerText}`);
-    // });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -211,7 +134,9 @@ import { SingleCard, crossUndoneBtn } from "../components/SingleCard.js";
      */
     _.deleteBtn.addEventListener("click", () => {
       console.log(`#${cardID}:`, "delete");
-      console.log(_.deleteBtn);
+      alert("delete");
+      // console.log(`#${cardID}:`, "delete");
+      // console.log(_.deleteBtn);
     });
   });
   // End of array of card forEach
