@@ -35,6 +35,7 @@ const fullBtnToast = (
   else if (anyCustomClass == 'red' || anyCustomClass == 'danger') confirmButtonStyle = redBtn
   else if (anyCustomClass == 'pink' || anyCustomClass == 'primary') confirmButtonStyle = pinkBtn
   else if (anyCustomClass == 'indigo' || anyCustomClass == 'secondary') confirmButtonStyle = indigoBtn
+  else if (anyCustomClass == 'undoConfirm') confirmButtonStyle = yellowBtn
   else confirmButtonStyle = pinkBtn
 
   // default options
@@ -65,6 +66,7 @@ const fullBtnToast = (
  */
 const basicToast = (title, iconType) => {
   Swal.mixin({
+    showCloseButton: true,
     toast: true,
     position: "top-end",
     showConfirmButton: false,
@@ -84,19 +86,56 @@ const basicToast = (title, iconType) => {
  * 
  * @param {*} param0 
  */
-function boilerplateToast({ iconType, title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "success"}}) {
+function boilerplateToast({ iconType, title, toastType, opts}, toastRole = null, dataToUndo = null) {
   // choose wheter "basic w/o button" or go for "full button"
   if (toastType == "basic") {
     basicToast(title, iconType);
   } else if (toastType == "fullBtn") {
-    fullBtnToast(opts.confirmButtonText, opts.anyCustomClass)
+    return fullBtnToast(opts.confirmButtonText, opts.anyCustomClass)
       .fire({
         icon: iconType,
         title: title,
       })
+      .then((toastStatus) => {
+        console.log('firedddddddddddddddddddddddddddddddddddd');
+        if (toastStatus.isConfirmed == true) {
+          if (toastRole == "undo" && dataToUndo != null) {
+            return undoClearAllTodosCallback(dataToUndo)
+          }
+        }
+      })
       // we can use .then here
   }
 }
+
+
+/**
+ * 
+ * @param {*} dataToUndo 
+ * @returns 
+ */
+export function undoClearAllTodosCallback(dataToUndo) {
+  try {
+    // undoDeleteMyTodoLists
+    localStorage.setItem("myTodoList", JSON.stringify(dataToUndo))
+    console.log('undoClearAllTodosCallback', dataToUndo);
+
+    infoToast({
+      title: "Your data is back! Please refresh the page.",
+      toastType: "basic"
+    })
+
+    setTimeout(() => {
+      location.reload()
+    }, 3000);
+
+    return 'true'
+  } catch (e) {
+    console.error(e);
+    return 'false'
+  }
+}
+
 
 /**
  * 
@@ -104,7 +143,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const successToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "success"}}) => {
+const successToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "success"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "success", title, toastType, opts })
 };
@@ -115,7 +154,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const infoToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "info"}}) => {
+const infoToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "info"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "info", title, toastType, opts })
 };
@@ -126,7 +165,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const warningToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "warning"}}) => {
+const warningToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "warning"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "warning", title, toastType, opts })
 };
@@ -137,7 +176,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const questionToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "question"}}) => {
+const questionToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "question"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "question", title, toastType, opts })
 };
@@ -148,7 +187,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const dangerToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "danger"}}) => {
+const dangerToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "danger"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "danger", title, toastType, opts })
 };
@@ -159,7 +198,7 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const primaryToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "primary"}}) => {
+const primaryToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "primary"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "primary", title, toastType, opts })
 };
@@ -170,9 +209,23 @@ function boilerplateToast({ iconType, title, toastType = "basic", opts = {confir
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
- const secondaryToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "secondary"}}) => {
+const secondaryToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "secondary"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
   boilerplateToast({ iconType: "secondary", title, toastType, opts })
+};
+
+/**
+ * 
+ * undoConfirm toast with "basic w/o button" or go for "full button".
+ * 
+ * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
+ */
+const undoConfirmToast = async ({ title, toastType = "fullBtn", opts = {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"} }, dataToUndo) => {
+  // whether the params are supplied or not, the default value will remain
+  Object.assign(opts, {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"})
+  // Fill all the params then boilerplateToast() will decide it for you
+  var toastRole = "undo"
+  console.warn(await boilerplateToast({ iconType: "success", title, toastType, opts }, toastRole, dataToUndo))
 };
 
 
@@ -185,4 +238,5 @@ export {
   questionToast,
   primaryToast,
   secondaryToast,
+  undoConfirmToast
 };

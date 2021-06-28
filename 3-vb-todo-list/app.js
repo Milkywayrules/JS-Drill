@@ -45,49 +45,58 @@ var undoDeleteMyTodoLists;
 deleteAllTodosBtn.onclick = () => {
   // get all to-dos from localStorage to be used in the undo process
   undoDeleteMyTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
-  // undo feature expired in 15 seconds
+  
+  // remove all to-do lists
+  localStorage.removeItem('myTodoList');
+  // set HTML card to empty string
+  cardsWrapper.innerHTML = ''
+
+  // undo feature expired in 15 seconds, but set the time for 17 seconds (2 seconds tolerance)
   setTimeout(() => {
     undoDeleteMyTodoLists = null
-  }, 15000);
+    console.log('settimeout');
+  }, 17000);
+
+  // 
+  swal.undoConfirmToast({
+    // success, info, warning, question, danger, primary, secondary
+    title: "Your to-do list(s) have been deleted.",
+    toastType: "fullBtn",
+    opts: { timer: 15000 }
+  },
+    undoDeleteMyTodoLists
+  )
+
+
 
   // give warning to user and confirmation
-  const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
-  if (deletionConfirm != null && (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y")) {
-    // remove all to-do lists
-    // localStorage.removeItem('myTodoList');
-    // set HTML card to empty string
-    // cardsWrapper.innerHTML = ''
-    
-    swal.successToast({
-      // success, info, warning, question, danger, primary, secondary
-      title: "All your To-do(s) has been deleted.",
-      toastType: "fullBtn",
-    })
-
-  } else {
-    swal.infoToast({
-      // success, info, warning, question, danger, primary, secondary
-      title: "All your To-do(s) are safe.",
-      toastType: "basic"
-    })
-  }
+  // const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
+  
+  // if (deletionConfirm != null && (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y")) {
+  // } else {
+  //   swal.infoToast({
+  //     // success, info, warning, question, danger, primary, secondary
+  //     title: "All your To-do(s) are safe.",
+  //     toastType: "fullBtn"
+  //   })
+  // }
 }
 
-function undoData(arrData) {
-  // undoDeleteMyTodoLists
-  localStorage.setItem("myTodoList", JSON.stringify(arrData))
-  undoDeleteMyTodoLists = null
-  alert("Your data is back! Wow!")
-  location.reload()
-}
+// function undoData(arrData) {
+//   // undoDeleteMyTodoLists
+//   localStorage.setItem("myTodoList", JSON.stringify(arrData))
+//   undoDeleteMyTodoLists = null
+//   alert("Your data is back! Wow!")
+//   location.reload()
+// }
 
-document.getElementById("undo-btn").onclick = () => {
-  if (undoDeleteMyTodoLists) {
-    undoData(undoDeleteMyTodoLists)
-  } else {
-    alert("Your data is gone, brow.")
-  }
-}
+// document.getElementById("undo-btn").onclick = () => {
+//   if (undoDeleteMyTodoLists) {
+//     undoData(undoDeleteMyTodoLists)
+//   } else {
+//     alert("Your data is gone, brow.")
+//   }
+// }
 
 
 /**
