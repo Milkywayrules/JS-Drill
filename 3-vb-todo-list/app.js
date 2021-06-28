@@ -1,5 +1,5 @@
 import { createCardHTML, assignCardListener } from "./utils/CardUtils.js";
-import * as swal from "./utils/SwalCustom.js"
+import * as swal from "./utils/SwalToast.js"
 
 const deleteAllTodosBtn = document.getElementById("delete-all-todos-btn")
 // 
@@ -52,20 +52,21 @@ deleteAllTodosBtn.onclick = () => {
 
   // give warning to user and confirmation
   const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
-  console.log(deletionConfirm, typeof deletionConfirm);
   if (deletionConfirm != null && (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y")) {
     // remove all to-do lists
     // localStorage.removeItem('myTodoList');
     // set HTML card to empty string
     // cardsWrapper.innerHTML = ''
     
-    swal.successAlert({
+    swal.successToast({
+      // success, info, warning, question, danger, primary, secondary
       title: "All your To-do(s) has been deleted.",
       toastType: "fullBtn",
     })
 
   } else {
-    swal.infoAlert({
+    swal.infoToast({
+      // success, info, warning, question, danger, primary, secondary
       title: "All your To-do(s) are safe.",
       toastType: "basic"
     })
