@@ -51,17 +51,24 @@ deleteAllTodosBtn.onclick = () => {
   }, 15000);
 
   // give warning to user and confirmation
-  const deletionConfirm = toString(prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...'))
-  if (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y") {
+  const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
+  console.log(deletionConfirm, typeof deletionConfirm);
+  if (deletionConfirm != null && (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y")) {
     // remove all to-do lists
-    localStorage.removeItem('myTodoList');
+    // localStorage.removeItem('myTodoList');
     // set HTML card to empty string
-    cardsWrapper.innerHTML = ''
-    swal.successAlert({ title:"All your To-do(s) has been deleted." })
-    // alert("All your To-do(s) has been deleted.")
+    // cardsWrapper.innerHTML = ''
+    
+    swal.successAlert({
+      title: "All your To-do(s) has been deleted.",
+      toastType: "fullBtn",
+    })
+
   } else {
-    swal.infoAlert({ title:"All your To-do(s) are safe." })
-    // alert("All your To-do(s) are safe.")
+    swal.infoAlert({
+      title: "All your To-do(s) are safe.",
+      toastType: "basic"
+    })
   }
 }
 
