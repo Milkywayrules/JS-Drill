@@ -620,6 +620,11 @@ video {
   outline-offset: 2px;
 }
 
+button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .z-10 {
   z-index: 10;
 }

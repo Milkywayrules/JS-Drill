@@ -10,4 +10,7 @@
   * {
     @apply focus:outline-none;
   }
+  button {
+    @apply focus:outline-none;
+  }
 }
