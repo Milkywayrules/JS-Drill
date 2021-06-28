@@ -29,7 +29,7 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
   return `
     <!-- card-wrapper -->
     <div id="${cardID}-cardWrapperOuter" data-id="${cardID}" data-status="${cardStatus}" class="flex flex-col drop-shadow-lg hover:drop-shadow-xl">
-      <button id="${cardID}-cardWrapper" class="focus:outline-none bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl" title="#${cardID} ~ ${todoText}">
+      <button id="${cardID}-cardWrapper" class="bg-white rounded z-10 ring-indigo-300 focus:ring-4 focus:shadow-xl" title="#${cardID} ~ ${todoText}">
         
         <div id="${cardID}-textWrapper" class="flex flex-col lg:flex-row">
           <p id="${cardID}-text" class="w-full px-5 py-6 text-left text-gray-900 lg:w-11/12">

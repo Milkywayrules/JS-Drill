@@ -5,3 +5,9 @@
 * {
   scroll-behavior: smooth;
 }
+
+@layer base {
+  * {
+    @apply focus:outline-none;
+  }
+}
