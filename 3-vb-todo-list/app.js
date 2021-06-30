@@ -2,6 +2,7 @@ import { createCardHTML, assignCardListener } from "./utils/CardUtils.js";
 import * as swal from "./utils/SwalToast.js"
 
 const deleteAllTodosBtn = document.getElementById("delete-all-todos-btn")
+const toggleDarkMode = document.getElementById("dark-mode-btn")
 // 
 const inputForm = document.getElementById("input-form");
 const inputBox = document.getElementById("input-box");
@@ -12,6 +13,19 @@ const todoListContainerTitle = document.querySelector("#todo-list-container h2")
 const cardsWrapper = document.getElementById("cards-wrapper");
 // const arrayOfCards = Array.prototype.slice.call(cardsWrapper.children);
 
+let isDarkMode;
+let jsDrillTodoListDarkModeKey = "jsDrillTodoListDarkMode";
+(function() {
+  if (localStorage.getItem(jsDrillTodoListDarkModeKey)) {
+    isDarkMode = localStorage.getItem("jsDrillTodoListDarkMode") == "true" ? true : false
+    setDarkLightMode(isDarkMode)
+  } else {
+    localStorage.setItem(jsDrillTodoListDarkModeKey, "false")
+    isDarkMode = false
+    console.log('set');
+  }
+})()
+
 // get all to-do(s) and render all the to-do(s) list card then assign listener
 if (localStorage.getItem("myTodoList")) {
   try {
@@ -19,6 +33,7 @@ if (localStorage.getItem("myTodoList")) {
     const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
 
     todoListContainerTitle.classList.replace("hidden", "block")
+    deleteAllTodosBtn.classList.replace("hidden", "block")
 
     // 
     myTodoLists.forEach(myTodoList => {
@@ -55,6 +70,7 @@ deleteAllTodosBtn.onclick = () => {
   // set HTML card to empty string
   cardsWrapper.innerHTML = ''
   todoListContainerTitle.classList.replace("block", "hidden")
+  deleteAllTodosBtn.classList.replace("block", "hidden")
 
   // 
   swal.undoConfirmToast({
@@ -145,6 +161,8 @@ inputForm.onsubmit = (e) => {
     // create card and assign event listener to every components in a single card
     const { cardWrapperOuter } = createCardHTML({ cardsWrapper, cardID:toSave.ID, cardStatus:toSave.status, todoText:toSave.text })
     assignCardListener([cardWrapperOuter])
+    // show clear all todo lists button
+    deleteAllTodosBtn.classList.replace("hidden", "block")
     
     // reset inputBox to the initial condition
     inputBox.value = ''
@@ -170,3 +188,17 @@ inputForm.onsubmit = (e) => {
 // End of onSubmit
 
 
+/**
+ * Toggle between dark and light mode. Get user preferences using localStorage item.
+ */
+toggleDarkMode.onclick = () => {
+  isDarkMode = !isDarkMode
+  setDarkLightMode(isDarkMode)
+  localStorage.setItem(jsDrillTodoListDarkModeKey, isDarkMode)
+}
+
+function setDarkLightMode (isDarkMode) {
+  const htmlClassList = document.querySelector("html").classList
+  if (isDarkMode) htmlClassList.replace("light", "dark")
+  else htmlClassList.replace("dark", "light")
+}
