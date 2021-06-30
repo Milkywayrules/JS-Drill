@@ -81,20 +81,31 @@ import { SingleCard } from "../components/SingleCard.js";
      */
     // when the card is focus, whether clicked or tabbed
     _.cardWrapper.addEventListener("focusin", () => {
-      // 
+      // get current timestamp / 1000 to get more narrow value
+      // to see differences between onfocus and onclick.
       const focusTimestamp = parseInt(Date.now()/1000)
-      // toggle from hidden to block -> show
+      // toggle from hidden to block -> show cardWrapper
       _.checkOrCrossBtn.classList.replace("hidden", "block");
-      // 
+      // toggle edit&delete btn wrapper from hidden to show -> show modifyWrapper
       _.modifyWrapper.classList.remove("hidden");
+      // toggle card accent on bottom from show to hidden -> hide card bottom accent
       _.cardBottom.classList.add("hidden");
+      // add margin bottom 5 to the outer of cardWrapper,
+      // so it's stay stay away of each other.
       cardWrapperOuter.classList.add("mb-5");
 
-      // 
+      // when the card is clicked, automatically onfocus after onclick.
+      // but, onfocus triggered first, then onclick.
       _.cardWrapper.onclick = () => {
-        // 
+        // get current timestamp / 1000 to get more narrow value
+        // to see differences between onfocus and onclick
         const clickTimestamp = parseInt(Date.now()/1000)
+        // if there is a delay about 1++ second,
+        // we assume the user clicking the card again to hide it.
+        // but if not, we assume the user clicked the card once,
+        // but triggered 2 event (onfocus & onclick).
         if (focusTimestamp != clickTimestamp) {
+          // blur = get out focus
           _.cardWrapper.blur()
         }
       };
@@ -104,7 +115,7 @@ import { SingleCard } from "../components/SingleCard.js";
      * when the card is out of focus after being focus
      */
     _.cardWrapper.addEventListener("focusout", () => {
-      // toggle from block to hidden -> hide
+      // toggle from block to hidden -> hide cardWrapper
       _.checkOrCrossBtn.classList.replace("block", "hidden");
       // 
       _.modifyWrapper.classList.add("hidden");

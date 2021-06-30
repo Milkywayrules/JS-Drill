@@ -36,15 +36,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           </button>
-
-          
-          <button id="undo-btn" class="text-green-600 px-2 md:px-4 py-1 rounded font-semibold transition-color duration-300 hover:-rotate-3 hover:bg-indigo-300 hover:shadow-md focus:rotate-3 focus:bg-indigo-300 focus:shadow-md" title="Toggle dark mode button">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-          </button>
-
-
         </ul>
       </nav>
     </header>
@@ -61,8 +52,8 @@
         </button>
       </form>
 
-      <section class="w-full md:w-2/3 lg:w-1/2 mx-auto lg:w-7/12 mt-8">
-        <h2 class="text-lg text-center text-white font-semibold"> My pretty list </h2>
+      <section id="todo-list-container" class="w-full md:w-2/3 lg:w-1/2 mx-auto lg:w-7/12 mt-8">
+        <h2 class="text-lg text-center text-white font-semibold hidden"> My pretty list </h2>
 
         <div id="cards-wrapper" class="mt-4 flex flex-col gap-1">
           <!-- To-do list card goes here -->

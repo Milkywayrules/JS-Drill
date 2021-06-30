@@ -1030,6 +1030,18 @@ button:focus {
   scroll-behavior: smooth;
 }
 
+@layer base {
+  *:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+
 .hover\:rotate-12:hover {
   --tw-rotate: 12deg;
   transform: var(--tw-transform);

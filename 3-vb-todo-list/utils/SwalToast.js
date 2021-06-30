@@ -9,12 +9,12 @@
  * @returns 
  * 
  */
-const fullBtnToast = (
+const fullBtnToast = ({
   confirmButtonText,
   anyCustomClass = 'default',
   timer = 3000,
   position = "top-end",
-) => {
+}) => {
   // set base styling for all button, then apply to specific style button.
   const baseBtn = "w-full mx-auto py-1 px-4 rounded font-bold";
   const greenBtn = `${baseBtn} text-green-700 bg-green-100 hover:bg-green-300`;
@@ -40,6 +40,7 @@ const fullBtnToast = (
 
   // default options
   const opts = {
+    showCloseButton: true,
     toast: true,
     position: position, // 'top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.
     showConfirmButton: true, // always true, bcs this is fullBtnToast ~_~
@@ -91,48 +92,28 @@ function boilerplateToast({ iconType, title, toastType, opts}, toastRole = null,
   if (toastType == "basic") {
     basicToast(title, iconType);
   } else if (toastType == "fullBtn") {
-    return fullBtnToast(opts.confirmButtonText, opts.anyCustomClass)
+    // default opts value
+    const optsDefault = { anyCustomClass: 'default', timer: 5000, position: "top-end" }
+    opts = { ...optsDefault, ...opts }
+
+    // 
+    return fullBtnToast(opts)
       .fire({
         icon: iconType,
         title: title,
       })
       .then((toastStatus) => {
-        console.log('firedddddddddddddddddddddddddddddddddddd');
+        // 
         if (toastStatus.isConfirmed == true) {
+          // 
           if (toastRole == "undo" && dataToUndo != null) {
             return undoClearAllTodosCallback(dataToUndo)
+          } else if (toastRole == "refreshPage") {
+            return location.reload()
           }
         }
       })
       // we can use .then here
-  }
-}
-
-
-/**
- * 
- * @param {*} dataToUndo 
- * @returns 
- */
-export function undoClearAllTodosCallback(dataToUndo) {
-  try {
-    // undoDeleteMyTodoLists
-    localStorage.setItem("myTodoList", JSON.stringify(dataToUndo))
-    console.log('undoClearAllTodosCallback', dataToUndo);
-
-    infoToast({
-      title: "Your data is back! Please refresh the page.",
-      toastType: "basic"
-    })
-
-    setTimeout(() => {
-      location.reload()
-    }, 3000);
-
-    return 'true'
-  } catch (e) {
-    console.error(e);
-    return 'false'
   }
 }
 
@@ -155,8 +136,11 @@ const successToast = ({ title, toastType = "basic", opts = {confirmButtonText: "
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
 const infoToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "info"} }) => {
+  const optsDefault = {confirmButtonText: "OK", anyCustomClass: "info"}
+  opts = { ...optsDefault, ...opts }
+
   // Fill all the params then boilerplateToast() will decide it for you
-  boilerplateToast({ iconType: "info", title, toastType, opts })
+  boilerplateToast({ iconType: "info", title, toastType, opts }, "refreshPage")
 };
 
 /**
@@ -189,7 +173,7 @@ const questionToast = ({ title, toastType = "basic", opts = {confirmButtonText: 
  */
 const dangerToast = ({ title, toastType = "basic", opts = {confirmButtonText: "OK", anyCustomClass: "danger"} }) => {
   // Fill all the params then boilerplateToast() will decide it for you
-  boilerplateToast({ iconType: "danger", title, toastType, opts })
+  boilerplateToast({ iconType: "error", title, toastType, opts })
 };
 
 /**
@@ -220,13 +204,46 @@ const secondaryToast = ({ title, toastType = "basic", opts = {confirmButtonText:
  * 
  * @param {Object} param0 title, toastType, opts = {confirmButtonText, anyCustomClass}
  */
-const undoConfirmToast = async ({ title, toastType = "fullBtn", opts = {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"} }, dataToUndo) => {
+const undoConfirmToast = ({ title, toastType = "fullBtn", opts: optsArgs = {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"} }, dataToUndo) => {
   // whether the params are supplied or not, the default value will remain
-  Object.assign(opts, {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"})
+  const optsDefault = {confirmButtonText: "Undo", anyCustomClass: "undoConfirm"}
+  const opts = {...optsDefault, ...optsArgs}
   // Fill all the params then boilerplateToast() will decide it for you
   var toastRole = "undo"
-  console.warn(await boilerplateToast({ iconType: "success", title, toastType, opts }, toastRole, dataToUndo))
+
+  boilerplateToast({ iconType: "success", title, toastType, opts }, toastRole, dataToUndo)
 };
+
+
+/**
+ * 
+ * Using Memento pattern for undo the clear all todos.
+ * see ref: https://stackoverflow.com/questions/54416318/how-to-make-a-undo-redo-function#answer-54416376
+ * 
+ * @param {*} dataToUndo 
+ * @returns 
+ */
+export function undoClearAllTodosCallback(dataToUndo) {
+  try {
+    // undoDeleteMyTodoLists
+    localStorage.setItem("myTodoList", JSON.stringify(dataToUndo))
+
+    infoToast({
+      title: "Your data is back! Please refresh the page.",
+      toastType: "fullBtn",
+      opts: { confirmButtonText: "Refresh now" }
+    })
+
+    setTimeout(() => {
+      location.reload()
+    }, 5000);
+
+    return 'true'
+  } catch (e) {
+    console.error(e);
+    return 'false'
+  }
+}
 
 
 

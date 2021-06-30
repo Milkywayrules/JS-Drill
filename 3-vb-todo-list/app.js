@@ -6,6 +6,8 @@ const deleteAllTodosBtn = document.getElementById("delete-all-todos-btn")
 const inputForm = document.getElementById("input-form");
 const inputBox = document.getElementById("input-box");
 const inputBtn = document.getElementById("input-btn");
+// 
+const todoListContainerTitle = document.querySelector("#todo-list-container h2")
 // Contains all children element on the cards-wrapper, then cast Obj to Arr
 const cardsWrapper = document.getElementById("cards-wrapper");
 // const arrayOfCards = Array.prototype.slice.call(cardsWrapper.children);
@@ -15,6 +17,8 @@ if (localStorage.getItem("myTodoList")) {
   try {
     // 
     const myTodoLists = JSON.parse(localStorage.getItem("myTodoList"))
+
+    todoListContainerTitle.classList.replace("hidden", "block")
 
     // 
     myTodoLists.forEach(myTodoList => {
@@ -50,53 +54,18 @@ deleteAllTodosBtn.onclick = () => {
   localStorage.removeItem('myTodoList');
   // set HTML card to empty string
   cardsWrapper.innerHTML = ''
-
-  // undo feature expired in 15 seconds, but set the time for 17 seconds (2 seconds tolerance)
-  setTimeout(() => {
-    undoDeleteMyTodoLists = null
-    console.log('settimeout');
-  }, 17000);
+  todoListContainerTitle.classList.replace("block", "hidden")
 
   // 
   swal.undoConfirmToast({
     // success, info, warning, question, danger, primary, secondary
     title: "Your to-do list(s) have been deleted.",
     toastType: "fullBtn",
-    opts: { timer: 15000 }
+    opts: { timer: 10000 }
   },
     undoDeleteMyTodoLists
   )
-
-
-
-  // give warning to user and confirmation
-  // const deletionConfirm = prompt('Do you really want to delete all your To-do(s) List? Even the unfinished task(s)? Type "yes" if you are really sure...')
-  
-  // if (deletionConfirm != null && (deletionConfirm.toLowerCase() === "yes" || deletionConfirm.toLowerCase() === "y")) {
-  // } else {
-  //   swal.infoToast({
-  //     // success, info, warning, question, danger, primary, secondary
-  //     title: "All your To-do(s) are safe.",
-  //     toastType: "fullBtn"
-  //   })
-  // }
 }
-
-// function undoData(arrData) {
-//   // undoDeleteMyTodoLists
-//   localStorage.setItem("myTodoList", JSON.stringify(arrData))
-//   undoDeleteMyTodoLists = null
-//   alert("Your data is back! Wow!")
-//   location.reload()
-// }
-
-// document.getElementById("undo-btn").onclick = () => {
-//   if (undoDeleteMyTodoLists) {
-//     undoData(undoDeleteMyTodoLists)
-//   } else {
-//     alert("Your data is gone, brow.")
-//   }
-// }
 
 
 /**
@@ -134,7 +103,8 @@ inputForm.onsubmit = (e) => {
     if (toSave.text === '') {
       inputBox.value = ''
       inputBox.focus()
-      throw 'To-do text is empty. Please fill with appropriate character.';
+      inputBtn.click()
+      throw 'Please fill with appropriate character.';
     }
     
     // disable inputBox and inputBtn so the user cannot do anything while processing the input to-do process
@@ -182,15 +152,18 @@ inputForm.onsubmit = (e) => {
     inputBtn.disabled = false;
     inputBox.focus()
     
-  } catch (e) {
+  } catch (err) {
     // reset inputBox to the initial condition
     inputBox.value = ''
     inputBox.disabled = false;
     inputBtn.disabled = false;
     inputBox.focus()
     // catch all error from child try catch and console then alert the user
-    console.error(e);
-    alert(e)
+    console.error(err);
+    swal.dangerToast({
+      title: err,
+      toastType: "basic"
+    })
   }
 
 };

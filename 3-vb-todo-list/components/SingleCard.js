@@ -6,22 +6,28 @@
  * @returns HTML template string
  */
 export const SingleCard = ({ cardID, cardStatus, todoText }) => {
+  // green for check button
   let greenClass = " bg-green-100 border-green-300 hover:bg-green-200 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
+  // red for cross button
   let redClass = " bg-red-100 border-red-300 lg:bg-red-50 lg:hover:bg-red-100 active:bg-red-200 "
 
+  // checkSVG for check button
   let checkSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
     </svg>
   `;
+  // crossSVG for cross button
   let crossSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
     </svg>
   `;
   
+  // 0|1 ; 0 = todo not done ; 1 = todo done
   cardStatus = parseInt(cardStatus)
   
+  // 
   const checkOrCross = cardStatus ? "Cross undone button" : "Check done button"
   const injectedSVG = cardStatus ? crossSVG : checkSVG
   const injectedClass = cardStatus ? redClass : greenClass
