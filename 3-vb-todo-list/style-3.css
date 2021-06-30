@@ -989,6 +989,105 @@ button:focus {
   text-decoration: line-through;
 }
 
+.placeholder-red-400::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(248, 113, 113, var(--tw-placeholder-opacity));
+}
+
+.placeholder-red-400:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(248, 113, 113, var(--tw-placeholder-opacity));
+}
+
+.placeholder-red-400::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(248, 113, 113, var(--tw-placeholder-opacity));
+}
+
+.placeholder-indigo-500::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-placeholder-opacity));
+}
+
+.placeholder-indigo-500:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-placeholder-opacity));
+}
+
+.placeholder-indigo-500::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-placeholder-opacity));
+}
+
+.placeholder-white::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-placeholder-opacity));
+}
+
+.placeholder-white:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-placeholder-opacity));
+}
+
+.placeholder-white::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-placeholder-opacity));
+}
+
+.placeholder-black::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-placeholder-opacity));
+}
+
+.placeholder-black:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-placeholder-opacity));
+}
+
+.placeholder-black::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-700::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-700:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-700::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-700\/50::-moz-placeholder {
+  color: rgba(55, 65, 81, 0.5);
+}
+
+.placeholder-gray-700\/50:-ms-input-placeholder {
+  color: rgba(55, 65, 81, 0.5);
+}
+
+.placeholder-gray-700\/50::placeholder {
+  color: rgba(55, 65, 81, 0.5);
+}
+
+.placeholder-gray-700\/75::-moz-placeholder {
+  color: rgba(55, 65, 81, 0.75);
+}
+
+.placeholder-gray-700\/75:-ms-input-placeholder {
+  color: rgba(55, 65, 81, 0.75);
+}
+
+.placeholder-gray-700\/75::placeholder {
+  color: rgba(55, 65, 81, 0.75);
+}
+
 .caret-indigo-500 {
   caret-color: #6366f1;
 }
@@ -1159,6 +1258,16 @@ button:focus {
 .focus\:bg-indigo-600:focus {
   --tw-bg-opacity: 1;
   background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
+}
+
+.focus\:bg-red-100:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgba(254, 226, 226, var(--tw-bg-opacity));
+}
+
+.focus\:bg-pink-100:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgba(252, 231, 243, var(--tw-bg-opacity));
 }
 
 .focus\:text-red-700:focus {
@@ -1401,6 +1510,11 @@ button:focus {
 .dark .dark\:active\:bg-indigo-800:active {
   --tw-bg-opacity: 1;
   background-color: rgba(55, 48, 163, var(--tw-bg-opacity));
+}
+
+.dark .dark\:active\:bg-white:active {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 
 .dark .group:hover .dark\:group-hover\:text-pink-100 {
