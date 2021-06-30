@@ -1,4 +1,8 @@
+import { ENV } from "../env.js";
 import { SingleCard } from "../components/SingleCard.js";
+import { getStorageItem } from "./LocalStorageUtils.js";
+import * as swalToast from "./SwalToast.js";
+import * as swalAlert from "./SwalAlert.js";
 
 /**
  * 
@@ -16,7 +20,9 @@ import { SingleCard } from "../components/SingleCard.js";
   // get to-do text element <p></p>
   const cardTodoTextEl = document.getElementById(`${cardID}-text`)
   // set innerText of to-do
-  cardTodoTextEl.innerText = todoText
+  todoText = document.createTextNode(todoText)
+  cardTodoTextEl.innerText = null
+  cardTodoTextEl.appendChild(todoText)
   // get CWO for export
   const cardWrapperOuter = document.getElementById(`${cardID}-cardWrapperOuter`)
 
@@ -112,7 +118,7 @@ import { SingleCard } from "../components/SingleCard.js";
     });
 
     /**
-     * when the card is out of focus after being focus
+     * when the card is out of focus after being focus.
      */
     _.cardWrapper.addEventListener("focusout", () => {
       // toggle from block to hidden -> hide cardWrapper
@@ -123,22 +129,43 @@ import { SingleCard } from "../components/SingleCard.js";
       cardWrapperOuter.classList.remove("mb-5");
     });
 
-
-
-
-
-
-
-
     /**
      * when edit btn is clicked
      * edit text in localStorage reference to cardID
      */
     _.editBtn.addEventListener("click", () => {
-      console.log(`#${cardID}:`, "edit");
-      alert("edit");
+      // 
+      const editTodo = getStorageItem(parseInt(cardID))
+      // 
+      swalAlert.inputText({
+        title: `<small>Edit: <br> <i>${editTodo.myTodo.text}</i></small>`,
+        opts: {
+          input: "text",
+          showCancelButton: true,
+          confirmButtonText: "Save",
+        },
+        thenOpts: {
+          title: "Update success",
+          cardID: parseInt(cardID)
+        }
+      })
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * when delete btn is clicked
      * delete data in localStorage reference to cardID
@@ -153,6 +180,5 @@ import { SingleCard } from "../components/SingleCard.js";
   // End of array of card forEach
 }
 // end of assignCardListener
-
 
 export { createCardHTML, assignCardListener }

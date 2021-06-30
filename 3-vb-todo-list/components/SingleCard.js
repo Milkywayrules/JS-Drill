@@ -55,7 +55,7 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
           dark:focus:ring-offset-2
           dark:focus:ring-offset-indigo-900
         "
-        title="#${cardID} ~ ${todoText}"
+        title="#${cardID} ~ ${todoText.substr(0, 200)}"
       >
         <div id="${cardID}-textWrapper" class="flex flex-col lg:flex-row">
           <p

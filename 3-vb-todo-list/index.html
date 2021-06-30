@@ -19,6 +19,28 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css"
     />
+
+    <script>
+      // set darkmode lightmode based on localStorage data
+      function setDarkLightMode (isDarkMode) {
+        const htmlClassList = document.querySelector("html").classList
+        if (isDarkMode) htmlClassList.replace("light", "dark")
+        else htmlClassList.replace("dark", "light")
+      }
+      
+      let isDarkMode;
+      let jsDrillTodoListDarkModeKey = "jsDrillTodoListDarkMode";
+      (function() {
+        if (localStorage.getItem(jsDrillTodoListDarkModeKey)) {
+          isDarkMode = localStorage.getItem("jsDrillTodoListDarkMode") === "true" ? true : false
+          setDarkLightMode(isDarkMode)
+        } else {
+          localStorage.setItem(jsDrillTodoListDarkModeKey, "false")
+          isDarkMode = false
+          console.log('set');
+        }
+      })()
+    </script>
   </head>
 
   <body class="bg-pink-600 dark:bg-gray-900">
@@ -39,7 +61,7 @@
             "
           />
         </a>
-        <ul class="flex gap-2 my-auto text-indigo-900">
+        <div class="flex gap-2 my-auto text-indigo-900">
           <button
             id="delete-all-todos-btn"
             class="
@@ -125,11 +147,12 @@
             </svg>
             <!-- /sun -->
           </button>
-        </ul>
+        </div>
       </nav>
     </header>
 
     <main class="px-8 lg:px-40">
+      <h1 class="mt-10 font-bold text-2xl text-white text-center"> #3 - BV To-do List </h1>
       <form
         id="input-form"
         class="w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 flex gap-2"
@@ -145,25 +168,15 @@
             px-4
             rounded
             outline-none
-
-            bg-gray-200
-
+            bg-white
             text-indigo-900
             caret-indigo-500
             ring-indigo-300
-
-            focus:bg-white
             focus:ring-4
             focus:shadow-lg
-
             disabled:bg-gray-500
             disabled:text-indigo-50
             disabled:cursor-not-allowed
-
-            dark:bg-gray-300
-
-            dark:focus:bg-white
-            
             dark:focus:ring-4
             dark:focus:ring-indigo-300
             dark:focus:ring-offset-2

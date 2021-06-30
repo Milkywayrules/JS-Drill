@@ -1,32 +1,58 @@
+import * as swalToast from "./SwalToast.js";
+import { getStorageItem, updateTodoLocStorage } from "./LocalStorageUtils.js"
 
-const timerAlert = ({ title, html, timer, querySelector }) => {
-  let timerInterval;
-  Swal.fire({
-    // title: 'Auto close alert!',
-    // html: 'I will close in <b></b> milliseconds.',
+function inputText({
+  title,
+  opts = { confirmButtonText: "Save" },
+  thenOpts = { title: "Input success", toastType: "basic" },
+}) {
+  // 
+  const optsDefault = {
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Save",
+  };
+  opts = { ...optsDefault, ...opts };
+
+  // 
+  const thenOptsDefault = { title: "Input success", toastType: "basic" };
+  thenOpts = { ...thenOptsDefault, ...thenOpts };
+
+  // 
+  return Swal.fire({
     title: title,
-    html: html,
-    timer: timer,
-    timerProgressBar: true,
-    didOpen: () => {
-      Swal.showLoading();
-      timerInterval = setInterval(() => {
-        const content = Swal.getHtmlContainer();
-        if (content) {
-          const b = content.querySelector(querySelector);
-          if (b) {
-            b.textContent = Swal.getTimerLeft();
+    input: opts.input,
+    inputAttributes: {
+      autocapitalize: opts.inputAttributes.autocapitalize,
+    },
+    showCancelButton: opts.showCancelButton,
+    confirmButtonText: opts.confirmButtonText,
+  })
+    .then((result) => {
+      if (result.isConfirmed) {
+        if (!!result.value) {
+          if (updateTodoLocStorage(thenOpts.cardID, { text: result.value}).isSuccess) {
+            document.getElementById(`${thenOpts.cardID}-text`).innerText = result.value
+            swalToast.successToast({
+              title: thenOpts.title,
+              toastType: thenOpts.toastType,
+            });
           }
+        } else {
+          throw "Input text is empty.";
         }
-      }, 100);
-    },
-    willClose: () => {
-      clearInterval(timerInterval);
-    },
-  }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-      console.log("I was closed by the timer");
-    }
-  });
-};
+        // another if here
+      }
+    })
+    .catch((err) => {
+      console.warn(new Error(err));
+      swalToast.warningToast({
+        title: err,
+      })
+    });
+}
+
+export { inputText };
