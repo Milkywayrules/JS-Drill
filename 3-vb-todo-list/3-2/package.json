@@ -1,0 +1,31 @@
+{
+  "name": "3-vb-todo-list",
+  "version": "1.0.0",
+  "description": "Personalize your own to-do list(s) with this very simple and straightforward To-do List Web App.",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js",
+    "serve": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "keywords": [],
+  "author": "Dio Ilham Djatiadi",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.0.0",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "sweetalert2": "^11.0.18"
+  }
+}

@@ -2,3 +2,5 @@
 # **/_env.js
 
 # 2-omdb-search/_env.js
+
+*/**/node_modules/
