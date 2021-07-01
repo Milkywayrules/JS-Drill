@@ -760,6 +760,18 @@ button:focus {
   width: 1rem;
 }
 
+.max-w-screen-xl {
+  max-width: 1280px;
+}
+
+.max-w-screen-lg {
+  max-width: 1024px;
+}
+
+.max-w-screen-md {
+  max-width: 768px;
+}
+
 .-translate-y-4 {
   --tw-translate-y: -1rem;
   transform: var(--tw-transform);
@@ -1368,6 +1380,11 @@ button:focus {
   background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }
 
+.focus\:bg-red-200:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgba(254, 202, 202, var(--tw-bg-opacity));
+}
+
 .focus\:text-red-700:focus {
   --tw-text-opacity: 1;
   color: rgba(185, 28, 28, var(--tw-text-opacity));
@@ -1697,6 +1714,11 @@ button:focus {
     padding-bottom: 1.5rem;
   }
 
+  .lg\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
   .lg\:hover\:bg-green-100:hover {
     --tw-bg-opacity: 1;
     background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
@@ -1705,5 +1727,11 @@ button:focus {
   .lg\:hover\:bg-red-100:hover {
     --tw-bg-opacity: 1;
     background-color: rgba(254, 226, 226, var(--tw-bg-opacity));
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:w-1\/2 {
+    width: 50%;
   }
 }

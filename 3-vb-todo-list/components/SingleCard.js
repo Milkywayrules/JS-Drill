@@ -57,7 +57,7 @@ const checkOrCrossBtn = (cardID, cardStatus) => {
 const SingleCard = ({ cardID, cardStatus, todoText }) => {
 
   const textDoneClass = "line-through bg-gray-500 focus:bg-gray-200 dark:bg-gray-600 dark:focus:bg-gray-400"
-  const textNotDoneClass = "not-line-through bg-white dark:bg-gray-50 dark:focus:bg-white"
+  const textNotDoneClass = "not-line-through bg-white focus:bg-white dark:bg-gray-50 dark:focus:bg-white"
   const textDoneOrNot = cardStatus ? textDoneClass : textNotDoneClass // if true (done) show textDoneClass
 
   const bottomDoneClass = "bg-gray-600 dark:bg-gray-700"

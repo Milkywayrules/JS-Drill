@@ -145,15 +145,23 @@ import * as swalAlert from "./SwalAlert.js";
         if (statusTodo.status) { // todo is now done (true)
           swalToast.successToast({ title: `Done: ${statusTodo.text}` })
           _.cardWrapper.classList.replace("not-line-through", "line-through")
-          _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
-          _.cardWrapper.classList.replace("dark:bg-gray-50", "dark:bg-gray-400")
+          _.cardWrapper.classList.replace("bg-white", "bg-gray-500")
+          _.cardWrapper.classList.replace("focus:bg-white", "focus:bg-gray-200")
+          _.cardWrapper.classList.replace("dark:bg-gray-50", "dark:bg-gray-600")
           _.cardWrapper.classList.replace("dark:focus:bg-white", "dark:focus:bg-gray-400")
+
+          _.cardBottom.classList.replace("bg-gray-300", "bg-gray-600")
+          _.cardBottom.classList.replace("dark:bg-gray-400", "dark:bg-gray-700")
         } else {
           swalToast.infoToast({ title: `Undone: ${statusTodo.text}` })
           _.cardWrapper.classList.replace("line-through", "not-line-through")
-          _.cardWrapper.classList.replace("bg-gray-400", "bg-white")
-          _.cardWrapper.classList.replace("dark:bg-gray-400", "dark:bg-gray-50")
+          _.cardWrapper.classList.replace("bg-gray-500", "bg-white")
+          _.cardWrapper.classList.replace("focus:bg-gray-200", "focus:bg-white")
+          _.cardWrapper.classList.replace("dark:bg-gray-600", "dark:bg-gray-50")
           _.cardWrapper.classList.replace("dark:focus:bg-gray-400", "dark:focus:bg-white")
+
+          _.cardBottom.classList.replace("bg-gray-600", "bg-gray-300")
+          _.cardBottom.classList.replace("dark:bg-gray-700", "dark:bg-gray-400")
         }
         
       }
