@@ -1,6 +1,6 @@
 import { ENV } from "./env.js";
 import { createCardHTML, assignCardListener } from "./utils/CardUtils.js";
-import { setStorageTodo } from "./utils/LocalStorageUtils.js";
+import { getStorageTodo, setStorageTodo } from "./utils/LocalStorageUtils.js";
 import * as swalToast from "./utils/SwalToast.js";
 
 const deleteAllTodosBtn = document.getElementById("delete-all-todos-btn");
@@ -183,11 +183,10 @@ inputForm.onsubmit = (e) => {
 /**
  * Toggle between dark and light mode. Get user preferences using localStorage item.
  */
-let jsDrillTodoListDarkModeKey = "jsDrillTodoListDarkMode";
 toggleDarkMode.onclick = () => {
   isDarkMode = !isDarkMode;
   setDarkLightMode(isDarkMode);
-  setStorageTodo(isDarkMode, jsDrillTodoListDarkModeKey)
+  localStorage.setItem(ENV.DB_DARKMODEKEYNAME, isDarkMode)
 };
 
 /**

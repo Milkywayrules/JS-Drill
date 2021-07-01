@@ -1,5 +1,5 @@
 import * as swalToast from "./SwalToast.js";
-import { getStorageItem, updateTodoLocStorage } from "./LocalStorageUtils.js"
+import { getStorageTodo, updateTodoLocStorage } from "./LocalStorageUtils.js"
 
 /**
  * 
@@ -44,7 +44,7 @@ function inputText({
     .then((result) => {
       if (result.isConfirmed) {
         if (!!result.value) {
-          const { myTodo: editTodo, myTodoLists } = getStorageItem(parseInt(thenOpts.cardID))
+          const { myTodo: editTodo, myTodoLists } = getStorageTodo(parseInt(thenOpts.cardID))
 
           editTodo.text = result.value
 

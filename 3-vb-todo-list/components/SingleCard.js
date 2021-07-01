@@ -56,9 +56,13 @@ const checkOrCrossBtn = (cardID, cardStatus) => {
  */
 const SingleCard = ({ cardID, cardStatus, todoText }) => {
 
-  const textDoneClass = "line-through bg-gray-400 dark:bg-gray-400 dark:focus:bg-gray-400"
+  const textDoneClass = "line-through bg-gray-500 focus:bg-gray-200 dark:bg-gray-600 dark:focus:bg-gray-400"
   const textNotDoneClass = "not-line-through bg-white dark:bg-gray-50 dark:focus:bg-white"
   const textDoneOrNot = cardStatus ? textDoneClass : textNotDoneClass // if true (done) show textDoneClass
+
+  const bottomDoneClass = "bg-gray-600 dark:bg-gray-700"
+  const bottomNotDoneClass = "bg-gray-300 dark:bg-gray-400"
+  const bottomDoneOrNot = cardStatus ? bottomDoneClass : bottomNotDoneClass // if true (done) show bottomDoneClass
 
   return `
     <!-- card-wrapper -->
@@ -74,7 +78,8 @@ const SingleCard = ({ cardID, cardStatus, todoText }) => {
           rounded
           z-10
           ring-indigo-300
-          focus:ring-4 focus:shadow-xl
+          focus:ring-4
+          focus:shadow-xl
           dark:focus:ring-4
           dark:focus:ring-indigo-300
           dark:focus:ring-offset-2
@@ -167,33 +172,12 @@ const SingleCard = ({ cardID, cardStatus, todoText }) => {
       </button>
       <div
         id="${cardID}-cardBottom"
-        class="h-6 mx-2 z-0 -translate-y-4 bg-gray-300 rounded dark:bg-gray-400"
+        class="h-6 mx-2 z-0 -translate-y-4 rounded ${bottomDoneOrNot}"
       ></div>
     </div>
     <!-- /card-wrapper -->  
   `;
 };
-
-
-// const checkDoneBtn = (cardID, isShown = "block") => `
-//   <!-- check done btn -->
-//   <div id="${cardID}-check" class="flex w-full py-2 items-center bg-green-100 shadow-inner border-b-2 border-green-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-green-50 lg:hover:bg-green-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-green-200 ${isShown}" title="Check done button">
-//     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-//     </svg>
-//   </div>
-//   <!-- /check done btn -->
-// `;
-
-// const crossUndoneBtn = (cardID, isShown = "block") => `
-//   <!-- cross undone btn -->
-//   <div id="${cardID}-cross" class="flex w-full py-2 items-center bg-red-100 shadow-inner border-b-2 border-red-300 lg:w-2/12 lg:w-1/12 lg:py-6 lg:bg-red-50 lg:hover:bg-red-100 lg:rounded-r lg:border-b-0 lg:border-l-4 active:bg-red-200 ${isShown}" title="Cross undone button">
-//     <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 h-5 w-5 mx-auto text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-//     </svg>
-//   </div>
-//   <!-- /cross undone btn -->
-// `;
 
 
 export { SingleCard, checkOrCrossBtn }

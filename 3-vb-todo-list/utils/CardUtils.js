@@ -1,6 +1,6 @@
 import { ENV } from "../env.js";
 import { checkOrCrossBtn, SingleCard } from "../components/SingleCard.js";
-import { getStorageItem, deleteTodoLocStorage, updateTodoLocStorage } from "./LocalStorageUtils.js";
+import { getStorageTodo, deleteTodoLocStorage, updateTodoLocStorage } from "./LocalStorageUtils.js";
 import * as swalToast from "./SwalToast.js";
 import * as swalAlert from "./SwalAlert.js";
 
@@ -135,12 +135,11 @@ import * as swalAlert from "./SwalAlert.js";
      */
     _.checkOrCrossBtn.addEventListener("click", () => {
       // 
-      const { myTodo: statusTodo, myTodoLists } = getStorageItem(parseInt(cardID))
+      const { myTodo: statusTodo, myTodoLists } = getStorageTodo(parseInt(cardID))
 
       statusTodo.status = !statusTodo.status
 
       if (updateTodoLocStorage(parseInt(cardID), statusTodo).isSuccess) {
-        console.log(statusTodo, myTodoLists);
         _.checkOrCrossBtn.innerHTML = checkOrCrossBtn(cardID, statusTodo.status, false)
 
         if (statusTodo.status) { // todo is now done (true)
@@ -157,8 +156,6 @@ import * as swalAlert from "./SwalAlert.js";
           _.cardWrapper.classList.replace("dark:focus:bg-gray-400", "dark:focus:bg-white")
         }
         
-        
-        console.warn(_.checkOrCrossBtn);
       }
 
       // 
@@ -182,7 +179,7 @@ import * as swalAlert from "./SwalAlert.js";
      */
     _.editBtn.addEventListener("click", () => {
       // 
-      const editTodo = getStorageItem(parseInt(cardID))
+      const editTodo = getStorageTodo(parseInt(cardID))
       // 
       swalAlert.inputText({
         title: `<small>Edit: <br> <i>${editTodo.myTodo.text}</i></small>`,
@@ -204,7 +201,7 @@ import * as swalAlert from "./SwalAlert.js";
      */
     _.deleteBtn.addEventListener("click", () => {
       // 
-      const { myTodo, myTodoLists: undoDeleteMyTodoLists} = getStorageItem(parseInt(cardID))
+      const { myTodo, myTodoLists: undoDeleteMyTodoLists} = getStorageTodo(parseInt(cardID))
 
       Swal.fire({
         title: `<small> Delete: <br> <i>${myTodo.text}</i> </small>`,
