@@ -1,6 +1,6 @@
 import { ENV } from "../env.js";
-import { SingleCard } from "../components/SingleCard.js";
-import { getStorageItem } from "./LocalStorageUtils.js";
+import { checkOrCrossBtn, SingleCard } from "../components/SingleCard.js";
+import { getStorageItem, deleteTodoLocStorage, updateTodoLocStorage } from "./LocalStorageUtils.js";
 import * as swalToast from "./SwalToast.js";
 import * as swalAlert from "./SwalAlert.js";
 
@@ -130,6 +130,53 @@ import * as swalAlert from "./SwalAlert.js";
     });
 
     /**
+     * when CHECK/CROSS btn is clicked
+     * CHECK/CROSS status in localStorage reference to done/not state
+     */
+    _.checkOrCrossBtn.addEventListener("click", () => {
+      // 
+      const { myTodo: statusTodo, myTodoLists } = getStorageItem(parseInt(cardID))
+
+      statusTodo.status = !statusTodo.status
+
+      if (updateTodoLocStorage(parseInt(cardID), statusTodo).isSuccess) {
+        console.log(statusTodo, myTodoLists);
+        _.checkOrCrossBtn.innerHTML = checkOrCrossBtn(cardID, statusTodo.status, false)
+
+        if (statusTodo.status) { // todo is now done (true)
+          swalToast.successToast({ title: `Done: ${statusTodo.text}` })
+          _.cardWrapper.classList.replace("not-line-through", "line-through")
+          _.cardWrapper.classList.replace("bg-white", "bg-gray-400")
+          _.cardWrapper.classList.replace("dark:bg-gray-50", "dark:bg-gray-400")
+          _.cardWrapper.classList.replace("dark:focus:bg-white", "dark:focus:bg-gray-400")
+        } else {
+          swalToast.infoToast({ title: `Undone: ${statusTodo.text}` })
+          _.cardWrapper.classList.replace("line-through", "not-line-through")
+          _.cardWrapper.classList.replace("bg-gray-400", "bg-white")
+          _.cardWrapper.classList.replace("dark:bg-gray-400", "dark:bg-gray-50")
+          _.cardWrapper.classList.replace("dark:focus:bg-gray-400", "dark:focus:bg-white")
+        }
+        
+        
+        console.warn(_.checkOrCrossBtn);
+      }
+
+      // 
+      // swalAlert.inputText({
+      //   title: `<small>Edit: <br> <i>${statusTodo.myTodo.text}</i></small>`,
+      //   opts: {
+      //     input: "text",
+      //     showCancelButton: true,
+      //     confirmButtonText: "Save",
+      //   },
+      //   thenOpts: {
+      //     title: "Update success",
+      //     cardID: parseInt(cardID)
+      //   }
+      // })
+    });
+
+    /**
      * when edit btn is clicked
      * edit text in localStorage reference to cardID
      */
@@ -151,30 +198,45 @@ import * as swalAlert from "./SwalAlert.js";
       })
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     /**
      * when delete btn is clicked
      * delete data in localStorage reference to cardID
      */
     _.deleteBtn.addEventListener("click", () => {
-      console.log(`#${cardID}:`, "delete");
-      alert("delete");
-      // console.log(`#${cardID}:`, "delete");
-      // console.log(_.deleteBtn);
+      // 
+      const { myTodo, myTodoLists: undoDeleteMyTodoLists} = getStorageItem(parseInt(cardID))
+
+      Swal.fire({
+        title: `<small> Delete: <br> <i>${myTodo.text}</i> </small>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: `Delete`,
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "mr-2 py-2 px-5 rounded font-bold text-red-700 bg-red-100 hover:bg-red-300 focus:ring-4 ring-red-600",
+          cancelButton: "mr-2 py-2 px-5 rounded font-bold text-gray-700 bg-gray-100 hover:bg-gray-300 focus:ring-4 ring-gray-600"
+        }
+      })
+      .then((event) => {
+        if (event.isConfirmed) {
+          // 
+          if (deleteTodoLocStorage(parseInt(cardID)).isSuccess) {
+            document.getElementById(`${cardID}-cardWrapperOuter`).innerHTML = null
+            //
+            swalToast.undoConfirmToast(
+              {
+                // success, info, warning, question, danger, primary, secondary
+                title: "Your to-do list(s) have been deleted.",
+                toastType: "fullBtn",
+                opts: { timer: 10000 },
+              },
+              undoDeleteMyTodoLists
+            );
+          }
+        }
+      })
+
+
     });
   });
   // End of array of card forEach

@@ -1,15 +1,14 @@
 /**
  * 
- * Single card HTML for to-do list.
- * 
- * @param {Object} param0 CardID, to-do status, to-do text
- * @returns HTML template string
+ * @param {*} cardID 
+ * @param {*} cardStatus 
+ * @returns 
  */
-export const SingleCard = ({ cardID, cardStatus, todoText }) => {
+const checkOrCrossBtn = (cardID, cardStatus) => {
   // green for check button
   let greenClass = " bg-green-100 border-green-300 hover:bg-green-200 lg:bg-green-50 lg:hover:bg-green-100 active:bg-green-200 "
   // red for cross button
-  let redClass = " bg-red-100 border-red-300 lg:bg-red-50 lg:hover:bg-red-100 active:bg-red-200 "
+  let redClass = " bg-red-100 border-red-300 hover:bg-red-200 lg:bg-red-50 lg:hover:bg-red-100 active:bg-red-200 "
 
   // checkSVG for check button
   let checkSVG = `
@@ -24,13 +23,42 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
     </svg>
   `;
   
-  // 0|1 ; 0 = todo not done ; 1 = todo done
-  cardStatus = parseInt(cardStatus)
-  
   // 
   const checkOrCross = cardStatus ? "Cross undone button" : "Check done button"
   const injectedSVG = cardStatus ? crossSVG : checkSVG
   const injectedClass = cardStatus ? redClass : greenClass
+
+  return `
+      <div 
+        class="
+          flex
+          w-full
+          py-2
+          items-center
+          shadow-inner
+          border-b-2
+          lg:w-2/12 lg:w-1/12 lg:py-6 lg:rounded-r lg:border-b-0 lg:border-l-4
+          ${injectedClass}
+        "
+        title="${checkOrCross} - (ID:${cardID})"
+        >
+        ${injectedSVG}
+      </div>
+  `;
+}
+
+/**
+ * 
+ * Single card HTML for to-do list.
+ * 
+ * @param {Object} param0 CardID, to-do status, to-do text
+ * @returns HTML template string
+ */
+const SingleCard = ({ cardID, cardStatus, todoText }) => {
+
+  const textDoneClass = "line-through bg-gray-400 dark:bg-gray-400 dark:focus:bg-gray-400"
+  const textNotDoneClass = "not-line-through bg-white dark:bg-gray-50 dark:focus:bg-white"
+  const textDoneOrNot = cardStatus ? textDoneClass : textNotDoneClass // if true (done) show textDoneClass
 
   return `
     <!-- card-wrapper -->
@@ -43,17 +71,15 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
       <button
         id="${cardID}-cardWrapper"
         class="
-          bg-white
           rounded
           z-10
           ring-indigo-300
           focus:ring-4 focus:shadow-xl
-          dark:bg-gray-50
-          dark:focus:bg-white
           dark:focus:ring-4
           dark:focus:ring-indigo-300
           dark:focus:ring-offset-2
           dark:focus:ring-offset-indigo-900
+          ${textDoneOrNot}
         "
         title="#${cardID} ~ ${todoText.substr(0, 200)}"
       >
@@ -62,25 +88,11 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
             id="${cardID}-text"
             class="w-full px-5 py-6 text-left text-gray-900 lg:w-11/12"
           >
-            Auto-generated temporary To-do.
+            --- Auto-generated temporary To-do. ---
           </p>
           <!-- checkOrCross done btn -->
-          <div
-            id="${cardID}-checkOrCross"
-            class="
-              flex
-              w-full
-              py-2
-              items-center
-              shadow-inner
-              border-b-2
-              lg:w-2/12 lg:w-1/12 lg:py-6 lg:rounded-r lg:border-b-0 lg:border-l-4
-              hidden
-              ${injectedClass}
-            "
-            title="${checkOrCross} (ID:${cardID})"
-          >
-            ${injectedSVG}
+          <div id="${cardID}-checkOrCross" class="hidden">
+            ${checkOrCrossBtn(cardID, cardStatus)}
           </div>
           <!-- /checkOrCross done btn -->
         </div>
@@ -184,3 +196,4 @@ export const SingleCard = ({ cardID, cardStatus, todoText }) => {
 // `;
 
 
+export { SingleCard, checkOrCrossBtn }

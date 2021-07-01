@@ -17,12 +17,12 @@ const fullBtnToast = ({
 }) => {
   // set base styling for all button, then apply to specific style button.
   const baseBtn = "w-full mx-auto py-1 px-4 rounded font-bold";
-  const greenBtn = `${baseBtn} text-green-700 bg-green-100 hover:bg-green-300`;
-  const blueBtn = `${baseBtn} text-blue-700 bg-blue-100 hover:bg-blue-300`;
-  const yellowBtn = `${baseBtn} text-yellow-700 bg-yellow-100 hover:bg-yellow-300`;
-  const redBtn = `${baseBtn} text-red-700 bg-red-100 hover:bg-red-300`;
-  const pinkBtn = `${baseBtn} text-pink-700 bg-pink-100 hover:bg-pink-300`;
-  const indigoBtn = `${baseBtn} text-indigo-700 bg-indigo-100 hover:bg-indigo-300`;
+  const greenBtn = `${baseBtn} text-green-700 bg-green-100 hover:bg-green-300 ring-green-600 focus:ring-4`;
+  const blueBtn = `${baseBtn} text-blue-700 bg-blue-100 hover:bg-blue-300 ring-blue-600 focus:ring-4`;
+  const yellowBtn = `${baseBtn} text-yellow-700 bg-yellow-100 hover:bg-yellow-300 ring-yellow-600 focus:ring-4`;
+  const redBtn = `${baseBtn} text-red-700 bg-red-100 hover:bg-red-300 ring-red-600 focus:ring-4`;
+  const pinkBtn = `${baseBtn} text-pink-700 bg-pink-100 hover:bg-pink-300 ring-pink-600 focus:ring-4`;
+  const indigoBtn = `${baseBtn} text-indigo-700 bg-indigo-100 hover:bg-indigo-300 ring-indigo-600 focus:ring-4`;
 
   // initialize confirmButtonStyle
   let confirmButtonStyle

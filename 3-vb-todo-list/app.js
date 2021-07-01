@@ -102,8 +102,8 @@ inputForm.onsubmit = (e) => {
     toSave.ID = Date.now() + ~~(Math.random() * 100);
     // get the to-do value from input box
     toSave.text = inputBox.value.trim();
-    // set status 0|1 ; 0 = not done yet, 1 = done
-    toSave.status = 0;
+    // set status false|true ; false = not done yet, true = done
+    toSave.status = false;
 
     // if the input text is empty, reset again the inputBox then alert user
     if (toSave.text === "") {
@@ -187,9 +187,13 @@ let jsDrillTodoListDarkModeKey = "jsDrillTodoListDarkMode";
 toggleDarkMode.onclick = () => {
   isDarkMode = !isDarkMode;
   setDarkLightMode(isDarkMode);
-  setStorageTodo(jsDrillTodoListDarkModeKey, isDarkMode)
+  setStorageTodo(isDarkMode, jsDrillTodoListDarkModeKey)
 };
 
+/**
+ * 
+ * @param {*} isDarkMode 
+ */
 function setDarkLightMode(isDarkMode) {
   const htmlClassList = document.querySelector("html").classList;
   if (isDarkMode) htmlClassList.replace("light", "dark");

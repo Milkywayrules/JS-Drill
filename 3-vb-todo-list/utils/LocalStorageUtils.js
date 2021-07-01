@@ -50,36 +50,46 @@ function updateTodoLocStorage(todoID = null, data = { ID: null, text: null, stat
   // get specific todo item from localStorage and get all todos too
   const { myTodo, myTodoLists } = getStorageTodo(todoID)
 
+  // 
   const newTodoLists = myTodoLists.map((rowTodo) => {
     if (rowTodo.ID === myTodo.ID) {
+      // keys are only 3: ID, text, and status. We never change the ID, so we change only these 2.
       rowTodo.text = data.text
+      rowTodo.status = data.status
     }
     return rowTodo
   })
 
+  // 
   if (setStorageTodo(newTodoLists).isSuccess) {
     return { isSuccess: true }
+  } else {
+    return { isSuccess: false }
   }
-
-  // const dataDefault = { ID: null, text: null, status: null }
-  // data = { ...dataDefault, data }
-
-  // console.log(1, data);
-  // if (id == null) {
-  //   return
-  // }
-  // if (Object.values(data).findIndex( data => data == null) === -1) {
-  //   return 
-  // }
-  // console.log(2, data);
-}
-
-function updateTodosLocStorage() {
-  return null
 }
 
 
+function deleteTodoLocStorage(todoID = null) {
+  // get specific todo item from localStorage and get all todos too
+  const { myTodo, myTodoLists } = getStorageTodo(todoID)
+
+  // 
+  const newTodoLists = myTodoLists.filter((rowTodo) => {
+    if (rowTodo.ID !== myTodo.ID) {
+      return rowTodo
+    }
+  })
+
+  // 
+  if (setStorageTodo(newTodoLists).isSuccess) {
+    return { isSuccess: true }
+  } else {
+    return { isSuccess: false }
+  }
+}
 
 
 
-export { getStorageTodo as getStorageItem, setStorageTodo, updateTodoLocStorage, updateTodosLocStorage }
+
+
+export { getStorageTodo as getStorageItem, setStorageTodo, updateTodoLocStorage, deleteTodoLocStorage }
