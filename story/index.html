@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get to know more behind the scenes of my JavaScript journey to become a Black Belt Ninja via my JS-Drill."
+    />
+    <meta name="theme-color" content="#4338CA" />
+
+		<title>Story Behind - JS Drill</title>
+    <script src="/favicon.js"></script>
+
+		<link rel="stylesheet" href="/story/style.story.css">
+
+		<!-- load zero-md for easier .md management -->
+		<script
+			type="module"
+			src="/story/zero-md.min.js"
+		></script>
+
+		<!-- dynamic load the zero-md according to moduleName param -->
+		<script>
+			//
+			window.onload = () => {
+				try {
+					// get params query
+					let params = new URLSearchParams(document.location.search.substring(1));
+					// get only params named "moduleName". Destructuring array.
+					let [ masterModule, subModule ] = params.get("moduleName").split(".");
+
+					// get element and override the element with the newest one
+					const zeroMd = document.getElementsByTagName("zero-md")[0];
+					const app = document.getElementById("app");
+					zeroMd.src = `./${masterModule}.${subModule}.md`;
+					app.innerHTML = zeroMd.outerHTML;
+				} catch (err) {
+					console.error(err);
+					alert(err)
+				}
+			};
+		</script>
+	</head>
+
+	<body>
+		<nav>
+			<a href="/">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+				</svg>
+				<span> Home </span>
+			</a>
+		</nav>
+
+		<div id="app">
+
+			Stay with me for a sec, <br> i'll get your file in my bedroom...
+			
+			<zero-md src="">
+				<template>
+					<link rel="stylesheet" href="/story/github-markdown.min.css">
+					<link rel="stylesheet" href="/story/prism.min.css">
+					<style>
+						.markdown-body {
+							font-size: 20px;
+						}
+						h4 {
+							color: #F97316; /* orange-500 */
+						}
+
+						p {
+							color: #1F2937; /* coolGray-800 */
+						}
+
+						.markdown-body a {
+							color: #EA580C; /* orange-600 */
+							text-decoration: underline;
+						}
+
+						.markdown-body a:hover {
+							color: #6B7280; /* coolGray-500 */
+						}
+
+						blockquote p {
+							color: #4B5563; /* coolGray-600 */
+						}
+
+						#see-also + ul {
+							gap: 20px;
+							display: flex;
+							flex-direction: column;
+						}
+					</style>
+				</template>
+				
+				<script type="text/markdown">
+					This is the fall-back markdown that will **only show**
+					when title param didn't exist or title param value didn't match the markdown filename.
+				</script>
+			</zero-md>
+		</div>
+		
+		<div id="back-home-bottom">
+			<a href="/">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+				</svg>
+				<span> Home </span>
+			</a>
+		</div>
+
+    <footer>
+      <small>
+				<a id="author-link" href="https://dioilham.com" target="_blank" rel="noopener"> Dio Ilham Djatiadi </a>
+			</small>
+    </footer>
+	</body>
+</html>

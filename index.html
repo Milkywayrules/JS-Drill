@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Search your favorite movie and fetch them trough RESTful API from http://www.omdbapi.com/"
+      content="JS-Drill is Dio's sandbox to play around with JavaScript and others tech stack as a full-stack web developer"
     />
-    <meta name="theme-color" content="#6366F1">
+    <meta name="theme-color" content="#4338CA" />
 
     <title>JS Drill - Dio Ilham Djatiadi</title>
-    <script src="./favicon.js"></script>
+    <script src="/favicon.js"></script>
 
     <!-- load bs5 css -->
     <link
@@ -21,42 +21,50 @@
       crossorigin="anonymous"
     />
   </head>
-  <body class="mx-5 my-3">
+  <body class="mx-5 mt-3 mb-5">
 
     <h1 class="fs-2 fw-bold">Welcome to JS Drill :)</h1>
     <sup>- Dio Ilham Djatiadi</sup>
 
     <p class="mt-4">
-      <h2>#1 Movie Search</h2>
+      <h2>#1 Movie Search (v1)</h2>
       <p>Search and showing only one recommended movie, series, or film. <br>
         Designed with very minimal BS5. API from omdbapi.com
       </p>
       <ul>
         <li>
           <span>Using XHR method:</span>
-          <a href="./1-movie-search/xhr.html">XHR</a>
+          <a href="/1-movie-search/xhr.html">Demo</a>
+          |
+          <a href="/story/?moduleName=1-movie-search.xhr">Story</a>
         </li>
         <li>
           <span>Using Fetch method:</span>
-          <a href="./1-movie-search/fetch.html">Fetch</a>
+          <a href="/1-movie-search/fetch.html">Demo</a>
+          |
+          <a href="/story/?moduleName=1-movie-search.fetch">Story</a>
         </li>
         <li>
           <span>Using Fetch, Async, and Await method:</span>
-          <a href="./1-movie-search/async.html">Async</a>
+          <a href="/1-movie-search/async.html">Demo</a>
+          |
+          <a href="/story/?moduleName=1-movie-search.async">Story</a>
         </li>
       </ul>
     </section>
 
     <section class="mt-4">
-      <h2>#2 OMDB Search</h2>
+      <h2>#2 Movie Search (v2)</h2>
       <p>
-        Search multiple movies, series, and films. Now, designed with Tailwindcss. <br>
-        API from omdbapi.com
+        Search multiple movies, series, and films. <br>
+        Now, designed with Tailwindcss. API from omdbapi.com
       </p>
       <ul>
         <li>
           <span>Well designed than drill number #1:</span>
-          <a href="./2-omdb-search/">Go to -></a>
+          <a href="/2-omdb-search">Demo</a>
+          |
+          <a href="/story/?moduleName=2-omdb-search.index">Story</a>
         </li>
       </ul>
     </section>
@@ -70,7 +78,15 @@
       <ul>
         <li>
           <span>Extensive usage of Local Storage than before:</span>
-          <a href="./3-vb-todo-list/">Go to -></a>
+          <a href="/3-vb-todo-list/3-1">Demo</a>
+          |
+          <a href="/story/?moduleName=3-vb-todo-list.3-1">Story</a>
+        </li>
+        <li>
+          <span>Using Webpack v5.41.x + Babel v7.14.x + PWA ready:</span>
+          <a href="/3-vb-todo-list/3-2/dist">Demo</a>
+          |
+          <a href="/story/?moduleName=3-vb-todo-list.3-2">Story</a>
         </li>
       </ul>
     </section>
