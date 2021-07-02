@@ -11,7 +11,7 @@ but soon, i promise to myself to get things done.
 
 Thank you for visitting and read this. Have a very nice day. :)
 
-> Visit demo page: [here](/1-movie-search/async.html)
+> Visit demo page: [here](/JS-Drill/1-movie-search/async.html)
 
 
 ## Section A
@@ -43,7 +43,7 @@ kindly send me an email
 [here](mailto:hai@dioilham.com?cc=projectwithdio@gmail.com&subject=Can%20We%20Collabs?),
 i would very excited!
 
-> Visit demo page: [here](/1-movie-search/async.html)
+> Visit demo page: [here](/JS-Drill/1-movie-search/async.html)
 
 
 ## Get In Touch
@@ -57,14 +57,14 @@ i would very excited!
 ## See Also
 
 *   **#1 Search a single movie from omdbapi.com API (v1)**
-    *  Using XHR method: [Story](/story/?moduleName=1-movie-search.xhr)
-    *  Using Fetch method: [Story](/story/?moduleName=1-movie-search.fetch)
-    *  Using Fetch and Async await method: [Story](/story/?moduleName=1-movie-search.async)
+    *  Using XHR method: [Story](/JS-Drill/story/?moduleName=1-movie-search.xhr)
+    *  Using Fetch method: [Story](/JS-Drill/story/?moduleName=1-movie-search.fetch)
+    *  Using Fetch and Async await method: [Story](/JS-Drill/story/?moduleName=1-movie-search.async)
     
 *   **#2 Search multiple movies from omdbapi.com API (v2)**
-    *  Well designed than drill #1: [Story](/story/?moduleName=2-omdb-search.index)
+    *  Well designed than drill #1: [Story](/JS-Drill/story/?moduleName=2-omdb-search.index)
     
 *   **#3 Create your daily to-do lists with very light-weight web app**
-    *  Extensive usage of Local Storage than drill #2: [Story](/story/?moduleName=1-movie-search.xhr)
-    *  Using Webpack + Babel + PWA: [Story](/story/?moduleName=1-movie-search.fetch)
+    *  Extensive usage of Local Storage than drill #2: [Story](/JS-Drill/story/?moduleName=3-vb-todo-list.3-1)
+    *  Using Webpack + Babel + PWA: [Story](/JS-Drill/story/?moduleName=3-vb-todo-list.3-2)
 
