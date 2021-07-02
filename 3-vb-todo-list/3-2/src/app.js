@@ -6,6 +6,8 @@ import * as swalToast from "./utils/SwalToast.js";
 import { setDarkLightMode, getDarkLightMode } from "./utils/ToggleDarkMode.js"
 import "./favicon.js"
 
+import "./service-worker.js"
+
 import "./style-3.css"
 
 let isDarkMode = getDarkLightMode()
