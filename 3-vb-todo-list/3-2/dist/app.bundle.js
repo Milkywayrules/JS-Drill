@@ -1062,15 +1062,16 @@ var workbox_strategies = __webpack_require__(539);
 if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-  console.log('```````SW');
-  (0,workbox_routing/* registerRoute */.X0)(function (_ref) {
-    var request = _ref.request;
-    return request.destination === 'script' || request.destination === 'style';
-  }, new workbox_strategies/* StaleWhileRevalidate */.jY({
-    cacheName: 'static-resources'
-  }));
+    navigator.serviceWorker.register('./service-worker.js').then(function () {
+      console.log('sukses register SW');
+    });
+  }); // registerRoute(
+  //   ({request}) => request.destination === 'script' ||
+  //                   request.destination === 'style',
+  //   new StaleWhileRevalidate({
+  //     cacheName: 'static-resources',
+  //   })
+  // );
 }
 ;// CONCATENATED MODULE: ./src/app.js
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }

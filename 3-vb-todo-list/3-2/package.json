@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --config webpack.dev.js",
-    "serve": "webpack serve --open --config webpack.dev.js",
+    "serve": "webpack serve --open --config webpack.dev.js --port 8000",
     "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
