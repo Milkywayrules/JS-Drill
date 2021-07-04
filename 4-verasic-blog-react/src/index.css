@@ -1,0 +1,7 @@
+@import url(./fonts/fonts.montserrat.css);
+@import url(./fonts/fonts.roboto.css);
+
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
