@@ -11,13 +11,4 @@ if ('serviceWorker' in navigator) {
         console.log('sukses register SW');
       })
   });
-
-
-  // registerRoute(
-  //   ({request}) => request.destination === 'script' ||
-  //                   request.destination === 'style',
-  //   new StaleWhileRevalidate({
-  //     cacheName: 'static-resources',
-  //   })
-  // );
 }

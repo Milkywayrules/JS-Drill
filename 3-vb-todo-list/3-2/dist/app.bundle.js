@@ -1065,13 +1065,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').then(function () {
       console.log('sukses register SW');
     });
-  }); // registerRoute(
-  //   ({request}) => request.destination === 'script' ||
-  //                   request.destination === 'style',
-  //   new StaleWhileRevalidate({
-  //     cacheName: 'static-resources',
-  //   })
-  // );
+  });
 }
 ;// CONCATENATED MODULE: ./src/app.js
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
