@@ -10,14 +10,18 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
-      amber: colors.amber,
-      orange: colors.orange,
-      sky: colors.sky,
-      blue: colors.blue,
-      berak: colors.emerald,
+      emerald: colors.emerald,
     },
     extend: {
       fontFamily: {
+        primary: [
+          'Roboto',
+          'Montserrat',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'sans-serif',
+        ],
         head: ['Montserrat', 'Roboto', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
         text: ['Roboto', 'Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
       },

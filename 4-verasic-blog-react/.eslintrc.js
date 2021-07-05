@@ -15,7 +15,30 @@ module.exports = {
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
+    // buat require()
     'global-require': 0,
+    'object-curly-newline': [
+      'error',
+      {
+        // buat objek
+        ObjectExpression: 'always',
+        ObjectPattern: {
+          multiline: true,
+        },
+        // buat import
+        ImportDeclaration: 'never',
+        // buat export
+        ExportDeclaration: {
+          multiline: true,
+          minProperties: 3,
+        },
+      },
+    ],
   },
 };

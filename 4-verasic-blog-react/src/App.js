@@ -1,12 +1,15 @@
-import NavHeader from './components/NavHeader';
-import Homepage from './components/Homepage';
+import TopNavbar from './components/TopNavbar';
+// import Homepage from './components/Homepage';
+import HomeHero from './components/HomeHero';
 
 function App() {
   return (
-    <div className="font-text h-screen bg-sky-800">
-      <NavHeader />
+    <div className="bg-gray-50 text-gray-900">
+      <TopNavbar />
+
       <main>
-        <Homepage />
+        <HomeHero />
+        {/* <Homepage /> */}
       </main>
     </div>
   );
