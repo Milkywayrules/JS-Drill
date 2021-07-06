@@ -19,4 +19,11 @@
   h4 {
     @apply text-lg font-medium font-head;
   }
+
+  .animate-pulse-0 {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .animate-pulse-0:hover {
+    animation: pulse 0s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }

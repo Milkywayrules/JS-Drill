@@ -1,31 +1,29 @@
-/**
- *
- * @returns
- */
+import { Link } from 'react-router-dom';
+
 export default function NavHeader() {
   return (
-    <nav className="w-full px-20 py-10 shadow-sm">
+    <nav className="w-full px-24 py-10 shadow-sm">
       <div className="mx-auto flex justify-between max-w-screen-xl text-gray-700">
-        <a
-          href="./"
+        <Link
+          to="./"
           className="my-auto font-head text-xl text-gray-900 font-bold tracking-tighter group"
         >
           Verasic
           <span className="text-gray-300 group-hover:text-emerald-400">Story</span>
-        </a>
+        </Link>
         <div className="flex gap-10">
-          <a href="/" className="px-1 font-semibold hover:text-gray-300">
+          <Link to="./" className="px-1 font-semibold hover:text-gray-300">
             Home
-          </a>
-          <a href="/story" className="px-1 font-semibold hover:text-gray-300">
+          </Link>
+          <Link to="./story" className="px-1 font-semibold hover:text-gray-300">
             Story
-          </a>
-          <a href="/portfolio" className="px-1 font-semibold hover:text-gray-300">
+          </Link>
+          <Link to="./portfolio" className="px-1 font-semibold hover:text-gray-300">
             Portfolio
-          </a>
-          <a href="/contact" className="px-1 font-semibold hover:text-gray-300">
+          </Link>
+          <Link to="./contact" className="px-1 font-semibold hover:text-gray-300">
             Contact
-          </a>
+          </Link>
           <button id="dark-mode-btn" className="" title="Toggle dark mode" type="button">
             {/* moon */}
             <svg
