@@ -2,28 +2,46 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import TopNavbar from './components/TopNavbar';
-// import Homepage from './components/Homepage';
 import HomeHero from './components/HomeHero';
+import useFetch from './hooks/UseFetch';
+
+const makeUserUrl = (user) => `https://api.github.com/users/${user}`;
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    let isDarkMode = localStorage.getItem(`${process.env.REACT_APP_VERASIC_CONF}darkMode`);
-
-    if (isDarkMode === 'true') {
-      isDarkMode = true;
-    } else if (isDarkMode === 'false') {
-      isDarkMode = false;
-    } else {
-      isDarkMode = false;
-    }
-
-    return isDarkMode;
-  });
+  const [user, setUser] = useState('');
+  const { response, isError, isLoading, setUrl } = useFetch(makeUserUrl('milkywayrules'));
 
   return (
     <Router>
       <div className="bg-gray-50 text-gray-900">
         <TopNavbar />
+
+        <div className="p-20 border">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setUrl(makeUserUrl(user));
+            }}
+          >
+            <input
+              type="text"
+              onChange={(e) => {
+                setUser(e.target.value);
+              }}
+              value={user}
+              id="input-box"
+            />
+            <button type="submit">Cari</button>
+          </form>
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>isError.message</p>}
+          {response && (
+            <a href={response.html_url}>
+              Click here:
+              {response.login}
+            </a>
+          )}
+        </div>
 
         <main>
           <Switch>
