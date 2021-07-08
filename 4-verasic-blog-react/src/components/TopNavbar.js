@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import useDarkMode from '../hooks/UseDarkMode';
 
 export default function NavHeader() {
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
+
   return (
     <nav className="w-full px-24 py-10 shadow-sm">
       <div className="mx-auto flex justify-between max-w-screen-xl text-gray-700">
@@ -24,7 +27,13 @@ export default function NavHeader() {
           <Link to="./contact" className="px-1 font-semibold hover:text-gray-300">
             Contact
           </Link>
-          <button id="dark-mode-btn" className="" title="Toggle dark mode" type="button">
+          <button
+            id="dark-mode-btn"
+            className=""
+            title="Toggle dark mode"
+            type="button"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+          >
             {/* moon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
