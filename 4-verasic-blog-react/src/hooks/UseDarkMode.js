@@ -6,23 +6,23 @@ function getDarkMode() {
 
 export default function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(() => getDarkMode());
+  const [hasError, setHasError] = useState(null);
 
   useEffect(() => {
-    console.log(isDarkMode);
     try {
+      const htmlElement = document.getElementsByTagName('html')[0];
       localStorage.setItem(`${process.env.REACT_APP_VERASIC_CONF}darkMode`, isDarkMode);
-      if (isDarkMode) {
-        document.getElementsByTagName('html')[0].classList.replace('dark', 'light');
-      } else {
-        document.getElementsByTagName('html')[0].classList.replace('light', 'dark');
-      }
+
+      if (isDarkMode) htmlElement.classList.replace('light', 'dark');
+      else htmlElement.classList.replace('dark', 'light');
     } catch (err) {
-      console.error(err);
+      setHasError(err);
     }
   }, [isDarkMode]);
 
   return {
     isDarkMode,
     setIsDarkMode,
+    hasError,
   };
 }
