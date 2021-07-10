@@ -27,7 +27,11 @@ module.exports = {
       'error',
       {
         // buat objek
-        ObjectExpression: 'always',
+        // ObjectExpression: 'always',
+        ObjectExpression: {
+          multiline: true,
+          minProperties: 3,
+        },
         ObjectPattern: {
           multiline: true,
         },
