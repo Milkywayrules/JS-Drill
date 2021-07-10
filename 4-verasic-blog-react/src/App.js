@@ -1,9 +1,16 @@
+// import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import TopNavbar from './components/TopNavbar';
-import HomeHero from './components/HomeHero';
+import useTabTitle from './hooks/UseTabTitle';
+
+import TopNavbar from './components/topnavbar/TopNavbar';
+import Story from './pages/Story';
+import Home from './pages/Home';
+import Portfolio from './pages/Portfolio';
 
 function App() {
+  const { setTabTitle } = useTabTitle('Verasic Blog');
+
   return (
     <Router>
       <div className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
@@ -12,16 +19,15 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <HomeHero />
+              <Home onClick={() => setTabTitle('Home')} />
             </Route>
+
             <Route path="/story">
-              <div>story</div>
+              <Story onClick={() => setTabTitle('Story')} />
             </Route>
+
             <Route path="/portfolio">
-              <div>portfolio</div>
-            </Route>
-            <Route path="/contact">
-              <div>contact</div>
+              <Portfolio onClick={() => setTabTitle('Portfolio')} />
             </Route>
           </Switch>
         </main>
