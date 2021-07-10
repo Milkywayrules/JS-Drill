@@ -7,6 +7,7 @@ function getDarkMode() {
 export default function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(() => getDarkMode());
   const [hasError, setHasError] = useState(null);
+  console.log('1. useDarkMode', isDarkMode);
 
   useEffect(() => {
     try {
@@ -15,10 +16,13 @@ export default function useDarkMode() {
 
       if (isDarkMode) htmlElement.classList.replace('light', 'dark');
       else htmlElement.classList.replace('dark', 'light');
+      console.log('2. useDarkMode', isDarkMode);
     } catch (err) {
       setHasError(err);
     }
   }, [isDarkMode]);
+
+  console.log('3. useDarkMode', isDarkMode);
 
   return {
     isDarkMode,

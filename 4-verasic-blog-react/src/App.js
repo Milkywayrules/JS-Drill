@@ -18,15 +18,15 @@ function App() {
 
         <main>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="./">
               <Home onClick={() => setTabTitle('Home')} />
             </Route>
 
-            <Route path="/story">
+            <Route path="./story">
               <Story onClick={() => setTabTitle('Story')} />
             </Route>
 
-            <Route path="/portfolio">
+            <Route path="./portfolio">
               <Portfolio onClick={() => setTabTitle('Portfolio')} />
             </Route>
           </Switch>
