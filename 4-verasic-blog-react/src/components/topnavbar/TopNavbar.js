@@ -1,31 +1,25 @@
 import { Link } from 'react-router-dom';
-import useDarkMode from '../hooks/UseDarkMode';
+
+import { useDarkMode } from '../../hooks/modules';
+
+import LogoLink from './LogoLink';
 
 export default function NavHeader() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
 
   return (
-    <nav className="w-full px-24 py-10 shadow-sm">
+    <nav className="w-full px-10 md:px-24 py-10 md:shadow-sm">
       <div className="mx-auto flex justify-between max-w-screen-xl text-gray-700">
-        <Link
-          to="./"
-          className="my-auto font-head text-xl text-gray-900 font-bold tracking-tighter group"
-        >
-          Verasic
-          <span className="text-gray-300 group-hover:text-emerald-400">Story</span>
-        </Link>
-        <div className="flex gap-10">
-          <Link to="./" className="px-1 font-semibold hover:text-gray-300">
+        <LogoLink />
+        <div className="flex gap-3 md:gap-10">
+          <Link to="./" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Home
           </Link>
-          <Link to="./story" className="px-1 font-semibold hover:text-gray-300">
+          <Link to="./story" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Story
           </Link>
-          <Link to="./portfolio" className="px-1 font-semibold hover:text-gray-300">
+          <Link to="./portfolio" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Portfolio
-          </Link>
-          <Link to="./contact" className="px-1 font-semibold hover:text-gray-300">
-            Contact
           </Link>
           <button
             id="dark-mode-btn"
@@ -37,7 +31,7 @@ export default function NavHeader() {
             {/* moon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 block text-gray-700 dark:hidden"
+              className="h-6 w-6 block text-gray-700 hover:text-gray-300 dark:hidden"
               fill="currentColor"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -53,7 +47,7 @@ export default function NavHeader() {
             {/* sun */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 hidden text-white dark:block"
+              className="h-6 w-6 hidden text-gray-300 hover:text-gray-700 dark:block"
               fill="currentColor"
               viewBox="0 0 24 24"
               stroke="currentColor"
