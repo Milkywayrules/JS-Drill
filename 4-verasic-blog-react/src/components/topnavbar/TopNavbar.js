@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { useDarkMode } from '../../hooks/modules';
 
@@ -12,15 +12,15 @@ export default function NavHeader() {
       <div className="mx-auto flex justify-between max-w-screen-xl text-gray-700">
         <LogoLink />
         <div className="flex gap-3 md:gap-10">
-          <Link to="./" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
+          <NavLink exact to="./" activeClassName="border-b-2 border-emerald-400" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Home
-          </Link>
-          <Link to="./story" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
+          </NavLink>
+          <NavLink to="./story" activeClassName="border-b-2 border-emerald-400" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Story
-          </Link>
-          <Link to="./portfolio" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
+          </NavLink>
+          <NavLink to="./portfolio" activeClassName="border-b-2 border-emerald-400" className="my-1 md:my-0 px-1 font-semibold hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-700">
             Portfolio
-          </Link>
+          </NavLink>
           <button
             id="dark-mode-btn"
             className=""
