@@ -1,3 +1,14 @@
+# Read this first
+## Where can i access the build version of VerasicStory?
+
+The answer to that is [here](https://verasicstory.netlify.app), hosted with Netlify.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/639089b1-f729-4adc-9b0e-6387e72cde74/deploy-status)](https://app.netlify.com/sites/verasicstory/deploys)
+
+
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
