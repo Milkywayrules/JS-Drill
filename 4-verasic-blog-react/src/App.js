@@ -1,7 +1,4 @@
-// import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-// import useTabTitle from './hooks/UseTabTitle';
 
 import TopNavbar from './components/topnavbar/TopNavbar';
 import Story from './pages/Story';
@@ -15,10 +12,6 @@ function App() {
   } else {
     baseUrl = process.env.REACT_APP_BASEURL_DEV;
   }
-
-  console.log(`${baseUrl}/story`);
-
-  // const { setTabTitle } = useTabTitle('Verasic Blog');
 
   return (
     <Router basename="">
