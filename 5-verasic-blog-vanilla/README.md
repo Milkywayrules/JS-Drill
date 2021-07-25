@@ -9,12 +9,12 @@ Verasic Story *(vanilla version)*
 ## Akses Melalui:
 
 ***Vanilla version***:  
-Live: [di sini](https://verasicstory-dicoding.netlify.app)  
-Repo: [di sini](https://github.com/Milkywayrules/dicoding_fe_courses/tree/1-belajar_dasar_pemrograman_web)  
+*Live*: [di sini](https://verasicstory-dicoding.netlify.app)  
+*Repo*: [di sini](https://github.com/Milkywayrules/dicoding_fe_courses/tree/1-belajar_dasar_pemrograman_web)  
 
 ***React version***:  
-Live: [di sini](https://verasicstory.netlify.app)  
-Repo: [di sini](https://github.com/Milkywayrules/JS-Drill/tree/master/4-verasic-blog-react)  
+*Live*: [di sini](https://verasicstory.netlify.app)  
+*Repo*: [di sini](https://github.com/Milkywayrules/JS-Drill/tree/master/4-verasic-blog-react)  
 
 
 ## Deskripsi:
@@ -24,10 +24,10 @@ Repo: [di sini](https://github.com/Milkywayrules/JS-Drill/tree/master/4-verasic-
 
 ## Fitur:
 
-- Hanya menampilkan konten yang didapatkan dari [web.dev/fast](https://web.dev/fast) dan seluruhnya diterjemahkan secara manual menggunakan *Google Translate* dari Bahasa Inggris ke Bahasa Indonesia.
+- Hanya menampilkan konten yang didapatkan dari *[web.dev/fast](https://web.dev/fast)* dan seluruhnya diterjemahkan secara manual menggunakan *Google Translate* dari Bahasa Inggris ke Bahasa Indonesia.
 - Memiliki 9 cerita.
 - Setiap cerita menampilkan kutipan yang diambil dari konten aslinya.
-- Pada setiap cerita terdapat tautan yang mengarahkan ke konten asli di [web.dev/fast](https://web.dev/fast).
+- Pada setiap cerita terdapat tautan yang mengarahkan ke konten asli di *[web.dev/fast](https://web.dev/fast)*.
 
 
 ## *Tech Stack* dan lainnya:
@@ -37,7 +37,7 @@ Repo: [di sini](https://github.com/Milkywayrules/JS-Drill/tree/master/4-verasic-
 - *Webp optimized images format.*
 - *Lazy load images.*
 - *Scored 99, 94, 100, and 100 for Performance, Accessibility, Best Practices, and SEO respectively on [Lighthouse](https://developers.google.com/web/tools/lighthouse).*
-- *Scored 95 on [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)*
+- *Scored 95 on [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights).*
 
 
 ## *Disclaimer*:
