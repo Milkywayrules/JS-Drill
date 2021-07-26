@@ -1,0 +1,57 @@
+/* sizing */
+.btn-sm {
+  @extend %button-base;
+  @include btn-size(2px 8px);
+}
+
+.btn {
+  @extend %button-base;
+  @include btn-size(4px 12px);
+}
+
+.btn-lg {
+  @extend %button-base;
+  @include btn-size(6px 16px);
+}
+
+.btn-xl {
+  @extend %button-base;
+  @include btn-size(8px 20px);
+}
+/* /sizing */
+
+/* coloring */
+.btn-gray {
+  @include btn-color($gray-100, $gray-700, $gray-300);
+}
+
+.btn-green {
+  @include btn-color($green-100, $green-700, $green-300);
+}
+
+.btn-blue {
+  @include btn-color($blue-100, $blue-700, $blue-300);
+}
+
+.btn-amber {
+  @include btn-color($amber-100, $amber-700, $amber-300);
+}
+
+.btn-rose {
+  @include btn-color($rose-100, $rose-700, $rose-300);
+}
+
+.btn-red {
+  @include btn-color($red-100, $red-700, $red-300);
+}
+/* /coloring */
+
+/* xxx */
+.pill {
+  border-radius: 48px;
+}
+
+
+
+
+

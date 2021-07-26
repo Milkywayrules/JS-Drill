@@ -1,0 +1,19 @@
+{
+  "name": "2-mavis-v1",
+  "version": "1.0.0",
+  "description": "Organzie your reads.",
+  "main": "app.js",
+  "author": "Dio Ilham Djatiadi",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc",
+    "serve": "tsc --watch"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "sass": "^1.36.0",
+    "typescript": "^4.3.5"
+  }
+}

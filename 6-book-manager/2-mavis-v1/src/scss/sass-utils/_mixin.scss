@@ -1,0 +1,32 @@
+/**/
+
+@mixin btn-size($padding) {
+  padding: $padding;
+}
+
+@mixin btn-color($bg-color, $color, $bg-color-state) {
+  background-color: $bg-color;
+  color: $color;
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $bg-color-state;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

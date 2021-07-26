@@ -1,0 +1,26 @@
+/* sass-utils folder */
+@import "./sass-utils/variables";
+@import "./sass-utils/mixin";
+@import "./sass-utils/extend";
+
+/* vendor folder */
+// @import "./vendors/";
+
+/* base folder */
+@import "./base/fonts";
+@import "./base/reset";
+@import "./base/base";
+
+/* layout folder */
+// @import "./layout/";
+
+/* components folder */
+@import "./components/buttons";
+
+/* pages folder */
+// @import "./pages/";
+
+
+
+// Thank you AdamMarsden for the structure inspirations
+// https://gist.github.com/AdamMarsden/7b85e8d5bdb5bef969a0
