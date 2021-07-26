@@ -1,9 +1,9 @@
 /**/
-
 @mixin btn-size($padding) {
   padding: $padding;
 }
 
+/**/
 @mixin btn-color($bg-color, $color, $bg-color-state) {
   background-color: $bg-color;
   color: $color;
@@ -15,18 +15,3 @@
     background-color: $bg-color-state;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
