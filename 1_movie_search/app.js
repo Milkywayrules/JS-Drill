@@ -3,7 +3,7 @@ const searchBtn = document.getElementById("submit");
 const preview = document.getElementById("preview");
 
 const apiKey = "32913f44"; // jangan dipake sembarangan yak, bikin aja akun sendiri di "http://www.omdbapi.com/". GRATIS.
-const baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
+const baseUrl = `http://www.omdbapi.com/?apsikey=${apiKey}`;
 
 
 searchBtn.onclick = () => {
@@ -20,7 +20,7 @@ searchBtn.onclick = () => {
       if (xhr.status >= 200 && xhr.status < 400) {
         successCallback(JSON.parse(xhr.responseText));
       } else {
-        errorCallback(new Error("Error fetching the data"));
+        errorCallback(new Error("Couldn't fetch data"));
       }
     };
 
@@ -48,6 +48,7 @@ searchBtn.onclick = () => {
       table.innerHTML = template
     },
     (err) => {
+      console.log(err);
       preview.innerHTML = err;
     }
   );
