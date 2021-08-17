@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Search your favorite movie and fetch them trough RESTful API from http://www.omdbapi.com/"
+    />
+    <meta name="theme-color" content="#4338CA" />
+
+    <title>#1.3 - Movie Search (Using Fetch API & Async Await)</title>
+    <script src="/JS-Drill/favicon.js"></script>
+    
+    <!-- load bs5 css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body style="margin: 10px 50px">
+    <a href="../"><- Back to home</a>
+    <h1 class="fw-bold">#1.3 - Movie Search (Using Fetch API & Async Await)</h1>
+
+    <input type="text" id="search" class="search mt-3" autofocus />
+    <button type="submit" id="submit" class="submit">Search</button>
+
+    <div id="result-header" class="d-none">
+      <p class="my-3 fw-bold">Search result:</p>
+      <span id="movie-not-found-text"></span>
+      <span id="loading-text">Loading data...</span>
+    </div>
+    <div id="search-result" class="d-none my-3">
+      <div class="card" style="max-width: 1200px">
+        <div class="row g-0">
+          <div class="col-md-3">
+            <img
+              class="img-fluid"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAFeCAYAAACmb/sKAAARSUlEQVR4nO3d3U4UWRuG4T6XPhhOw10OhSPhEMzM3sTEvTYajQk/xkhoJEaCwYAYiM+34VfQNP1Tq6pWrfd9130lJDMgTGdGnmmq1m1PZrOZTk5OdHZ2xhtvvPGW/HZycqLZbKbJ4eGhDg4OBABdHBwc6PDwUJOzszN9/vxZX758Kf2YADjz5csXff78WWdnZ3/H5M+fP/r48aO+fftW+rEBcOLbt2/6+PGj/vz58zgmknRzc6PZbKafP38WfogArPv586dms5lubm4k6emYSNLFxYXev3+v+/v7Uo8RgHH39/d6//69Li4uHt73bEwkaT6f6+joaOzHB8CJo6MjzefzJ+9bOSaSdHx8rNPT07EeGwAnTk9PdXx8/Oz9a8fk7u7u2dMYAHVrLoPc3d09+9jaMZGkq6srvXnzRtfX17kfIwDjrq+vNZvNdHV1tfLjG8dEenrrB0Cd2hwd2Tom0uOhFAB1anOotdWYSH+Py56fnw/12AA4cX5+3iq3aT0mt7e3evv2rS4vL4d4fAAcuLy81Nu3b3V7e7v117YeE0n68eNH6y8MwLfmCcSPHz9a/fqkMZGkr1+/UhgDFTg4ONDXr19b//rkMZHaXYwB4FeXmy6dxoTCGIir63GQTmMiURgDES2XwCk6j4lEYQxEsqoETtFrTCQKYyCKVSVwit5jIlEYA96tK4FTDDImd3d3+vDhA4Ux4NCmEjjFIGMiURgDHm0rgVMMNiYShTHgydBHPAYdE4nCGPBi6MOng4+JRGEMWNe2BE6RZUwojAG7UkrgFFnGRKIwBixKLYFTZBsTicIYsCa1BE6RdUwkCmPAitw3R7KPCYUxUN4Yxzayj4lEYQyU1KcETjHKmEgUxkAJY6Yuo42JRGEMjK1vCZxi1DGRKIyBsQxRAqcYfUx4DWMgv6FK4BSjj4lEYQzkNGQJnKLImEgUxkAOJY9iFBsTicIYGFrJQ6JFx0SiMAaGkqMETlF8TCiMgf5ylcApio+JRGEM9JGzBE5hYkwkCmOgq5wlcAozYyJRGAOpLN3EMDUmFMZAe9aOV5gaE4nCGGhjrBI4hbkxkSiMgU2svuidyTGRKIyBdcYsgVOYHROJwhhYNnYJnML0mFAYA49KlMApTI+JRGEMSOVK4BTmx0SydwsMGJOXIxMuxkSydTgHGJOXw5xuxkSiMEZ9SpfAKVyNCYUxauItgHU1JpK/f8FAF1ZK4BTuxkSiMEZ8VkrgFC7HRPJzUQpI5fVmg9sxkeTidhmQojkG4ZHrMaEwRiQWS+AUrsdEsn/EGGjDagmcwv2YSBTG8O/4+NhkCZwixJhIFMbwy3IJnCLMmFAYw6NIP6aHGROJwhi+eCiBU4QaE4nCGD54KYFThBsTye+hH9Qj4qHLkGMiURjDrqg5SNgx+f37N4UxzIkcqoYdEyn2fzj447EEThF6TKS4Tynhj8cSOEX4MZFiXuyCLzXcFKhiTCQKY5TjuQROUc2YNAeEKIwxJu8lcIpqxkSSvn//HuboMuyLUAKnqGpMpL9RFYUxxhChBE5R3ZhIf1/4mcIYOUUpgVNUOSYUxsgpUgmcosoxkSiMkUe0EjhFtWMiURhjWBFL4BRVj4lUx2EijKP2w5HVj4lEYYz+yDYYE0kUxuiHoPQvxuT/+A2BLpr/EUUtgVMwJgt4qopU0UvgFIzJktovoqE9Lt4/xZisUPPtPbRTSwmcgjFZgcIYm9RUAqdgTNagMMYqtZXAKRiTDSiMsay2EjgFY7IFhTEaNZbAKRiTLSiMIdVbAqdgTFqgMK5bzSVwCsakJQrjOtVeAqdgTBJwSKk+HGJsjzFJRGFcD/KKNIxJIgrjOhB+pmNMOuA3WmyUwN0wJh3xFDguSuBuGJMeuDgXDxfZu2NMeuC2YSyUwP0wJj1RGMdACdwfYzIACmPfKIGHwZgMhMLYL0rgYTAmA6Iw9ocSeDiMyYAojH2hBB4WYzIwCmMfKIGHx5hkQGFsG7f082BMMuHwk10cNsyDMcmIwtgeMoh8GJOMKIxtaQLN379/l34oITEmmVEY20AJnB9jMgKeWpdHCZwfYzISLvqVw8XwcTAmI+F2ZBncph8PYzIiCuNxUQKPizEZGYXxOCiBx8eYFEBhnB8l8PgYk0IojPOZz+eUwAUwJoVQGOfBj5HlMCYFNRcIKYyHQQlcFmNSGLcuh8Gt9/IYEwM4VNUfhwLLY0yMoDDujlzBBsbECArjbiiB7WBMDOEbIw0lsC2MiTE8ZW+PEtgWxsQgLiZux0VrexgTg7jNuRm3021iTIyiMF6Ng352MSaG8SJRT1EC28aYGEdh/IgS2DbGxAEKY0pgDxgTB2ovjCmBfWBMnKj1wiMlsB+MiSO13RLlFrkvjIkzNR3W4vCeL4yJQzUUxmQF/jAmDkUvjAkefWJMnIr6DUcJ7Bdj4tj5+Xm4HwUogf1iTJyLdJGypovLETEmzkW5fVrbbe+IGJMAvBfGtR7Ii4YxCcJrYUwJHAdjEojHwpgSOA7GJBhPhTElcCyMSTBeCmNK4HgYk4CsX9CkBI6JMQnK6q3WKLey8RxjEpjFQ2CRDtnhKcYkOEuFMSVwbIxJcFbCuahhIh4xJhUo/Y1sZdCQF2NSiZKFMSVwHRiTipS4+GnxIjDyYEwqMvZtWau3p5EHY1KZsQpj6wfnMDzGpEK5C2NK4DoxJpXKWRhTAteJMalYjsKYErhejEnFhi6MKYHrxphUbqgLpZTAYEzQ+xYuJTAkxgT/1+dwGSUwJMYEC7oUxpTAaDAmeJAa5JUOCGELY4In2g4EJTCWMSZ4pk1hTAmMZYwJVtp0UZUSGKswJlhp3e1eSmCsw5hgreXC+OrqihIYazEm2KgpjH/9+kUJjI0YE2x1enqqd+/eUQJjI8YEW83nc717987NaxijDMYEG11cXOjDhw/69euXi9cwRjmMCdZaLoH5oxixCWOClbg1jFSMCVbi0BpSMSZ4pk0JbOk1jGEDY4InCP3QFWOCB/wRBOiDMcGDLiVwydcwhi2MCSTxxzaiP8YE/IHSGARjUrmhSuCxXsMYdjEmFWteE/j79++DfL3cr2EM2xiTiuV4TeCcr2EM2xiTSuV8TeAcr2EM+xiTCjUlcK4fR4Z+DWP4wJhUZqwLpRTG9WFMKjL2LVwK47owJhUpcbiMwrgejEklSr4mMIVxHRiTCpQO8iiM68CYBGflG7n0oCE/xiQ4S68JTGEcG2MSmMWLnxTGcTEmQVm9LUthHBdjEpD11wSmMI6JMQlm6BI4FwrjeBiTYHKUwLlQGMfCmASSswTOhcI4DsYkiNwlcC4UxnEwJgF4v6BJYRwDY+JclFutVm9loz3GxLlIh8AsHrJDe4yJYyVL4FwojP1iTJyKGs5ZCRORjjFxKPo33OXlZcihjI4xcchSCZwLhbE/jIkzNV2kjHRxuQaMiSO13T6Nctu7FoyJE9ZL4Fy8H8irCWPigJcSOBcKYx8YEwc8lcC5UBjbx5gY57EEzoXC2DbGxDCvJXAuFMa2MSZGceFxNQpjuxgTg7glulltt8i9YEwM4rDWdjUd3vOCMTEmYgmcSw1ZgSeMiSFRS+BcogeP3jAmRvCN0Q2FsR2MiRE8Ze+OwtgGxsQALib2x0Xr8hiTwrjNOQxup5fHmBRUawmcy/X1td68ecNBv0IYk0Kao+G1lsC5UBiXw5gUQgmcD4VxGYxJAZTA+VEYj48xGRkl8Dj4MXJ8jMmIbm5uKIFHRGE8LsZkJNy6LINb7+NhTEbCoapyOBQ4DsZkBJTA5ZEr5MeYZEYJbMPt7S0hZWaMSUaUwLZQGOfFmGTEU2t7KIzzYUwy4aKfXVwMz4MxyYDbkbZxmz4PxmRglMA+NIXx1dVV6YcSBmMyIF4kyhcK42ExJgM6Pj4mLnOGwng4jMlAKIH9ojAeBmMyAEpg3yiMh8GY9EQJHAOFcX+MSU/cYoyDW/r9MCY9cPgpHg4bdseYdEQJHBcZRDeMSQeUwLFRGHfDmCTiN1odKIzTMSaJeApcDwrjNIxJAi7O1YeL7O0xJi1x27BOFMbtMSYtUALXjcK4HcZkC0pgSBTGbTAmW1ACo0FhvBljsgElMJZRGK/HmKxBCYxVKIzXY0xWoATGJhTGqzEmK3ArENs0RwXwiDFZwiEltMUhxqcYkwWUwEhFXvGIMfk/SmB0Qfj5iDERvyHQD4XxX4yJeKqK/iiMGRMuomEwtV+8r3pMKIExpNoL42rHhBIYOdRcGFc5JpTAyKnWwrjKMaEERm41FsbVjQklMMZSW2Fc1ZhQAmNMtRXG1YwJJTBKqKkwrmZMar5lh7JqKYyrGJPaDxOhvBoOR4YfE0pgWBE92wg9Jk0JfHt7W/qhAOGD0rBjEv0/HHyKXBiHHZPoTynhV9TCOOSY1HCxC75FvCkQbkwogeFBxMI41JhQAsOTaIVxmDGhBIZHkQrjMGNCCQyvTk9PQ8SnIcaEEhjeHR0daT6fl34YvbgfE0pgRBDhx3TXY0IJjEiawvjm5qb0Q+nE9ZhEu7UGeC6M3Y5JxEM/gOT30KXLMaEERnQecxB3Y0IJjBp4DFVdjYnHf8FAV01h7OV/nK7G5ODgQOfn56UfBjAaT4WxmzHxelEK6MvLzQYXY0IJjJp5KYzNjwklMOCjMDY9JhGOGANDsV4Ymx4TSmDgKcuFsdkxmc/n1b3wM9CG1cLY5JhQAgPr3d/fm/zx39yYUAID21ksjE2NiZdbYIAF1o5MmBoTL4dzACssHeY0MyaUwEA3VgpjE2NCCQx0ZyWALT4mzb+Iy8vLYo8B8M5CYVx8TCiBgWGULoyLjomli0dABCVvYhQbE2u3tYAISh6vKDImlMBAPqUK49HHhBIYyK9EYTz6mFACA+MYuzAedUwogYFxjVkYjzYmlMDA+MYsjEcZE0pgoJyxCuPsY0IJDJQ3xlGM7GNCCQzYkPuQaNYxoQQGbMlZGGcbE0pgwJ6chXGWMaEEBuzKVRhnGRNKYMC2HIXx4GNCCQz4MPTNkUHHhBIY8GPoYxuDjQklMODPkIXxIGNCCQz4NVTqMsiYUAIDvg1RGPceE0pgIIa+hXGvMWn+AJb7+/vODwCADX0L485jQgkMxNOnMO40JpTAQFxdj3h0GhNKYCC2LodPk8eEEhioQ2phnDQmlMBAPVIL49ZjQgkM1CelMG49JpTAQJ3aFsatxoQSGMhrb29Pk8nk4e3Vq1eSpP39/Sfvb952d3fXfvzTp09b/3mvXr1a+zmrvuZ///33cNNl8f2Lto4JJTCQ1/7+vqbT6ZO/XzcKzQg0H9vb29POzk7SP+/Tp0/PvsbiP3/V12yOg7x48eJhyHZ3dx/+WtoyJpTAQBmTyUT7+/vP3j+dTrW3t/fw98vf0F0sD9S6r3l9fa3JZKJ//vnnyec11o4JJTBQzuKPOo3mGcuinZ2dlaOzu7v75Nc2n7v8NaXnz0zWfc3mGc3Lly91d3f37BnO2jGhBAbKaK6fLNvZ2XnyrET6OzrT6fThGsbix3d2drS7u/vwTb88EM37l0dm3ddsnom8fv1ax8fHD5/ffO7KMaEEBspovmGXn0EsPwtYfF8zEs3nLo7G8gXbVRa/zqavufjj0NHRkV6/fr15TCiBgTLWDYn0/CLtOs2zkca6ZznbPm/VxxYH7f7+Xi9fvlz/Yw4lMFDGpiGR2l9oXRyF5pt/Op1uvePTZkykp9dy/v33X00mk4fC+GFMKIGBMpavPayy6qLo8l2Y5UFavPOz6keX5vMWL85u+5qLw7K7u6sXL148HB15GBNKYKCM5s7L8tvixdTpdLr2x59Vh92m0+nKsyvrDsMtfu1NH5OeH1prDrWenZ1pcnh4SAkMoLODgwMdHh5qMpvNdHJyorOzM95444235LeTkxPNZjP9D5WAFKIEJ7IDAAAAAElFTkSuQmCC"
+              alt="Poster image"
+              id="_image"
+            />
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h2 class="card-title fw-bold" id="_title"></h2>
+
+              <div class="">
+                <small
+                  class="text-muted"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Genre"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="18"
+                    width="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"
+                    />
+                  </svg>
+                  <span id="_genre"></span>
+                </small>
+              </div>
+
+              <div class="d-flex card-text">
+                <div class="">
+                  <small
+                    class="text-muted"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Total runtime"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="18"
+                      width="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span id="_runtime"></span>
+                  </small>
+                </div>
+
+                <div class="ms-3">
+                  <small
+                    class="text-muted"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Released date"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="18"
+                      width="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span id="_released"></span>
+                  </small>
+                </div>
+              </div>
+              <div class="d-flex">
+                <!-- <span style="font-weight: 600;" class="mt-2 mb-1">Rating</span> -->
+
+                <div class="">
+                  <small
+                    class="text-muted"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Metascore rating"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="18"
+                      width="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      />
+                    </svg>
+                    <span id="_metascore"></span>/100
+                  </small>
+                </div>
+
+                <div class="ms-3">
+                  <small
+                    class="text-muted"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="IMDB rating"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="18"
+                      width="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      />
+                    </svg>
+                    <span id="_imdbRating"></span>/10
+                  </small>
+                </div>
+              </div>
+              <div class="card-text">
+                <div class="">
+                  <small
+                    class="text-muted"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Rated"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="18"
+                      width="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
+                      />
+                    </svg>
+                    <span id="_rated"></span>
+                  </small>
+                </div>
+              </div>
+
+              <p class="mt-3 card-text" id="_plot"></p>
+              <p class="card-text">
+                <small class="text-muted">
+                  Searched at <span id="_lastUpdate"></span> mins ago
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.async.js"></script>
+    <!-- load bs5 js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./bs5.tooltip.js"></script>
+  </body>
+</html>

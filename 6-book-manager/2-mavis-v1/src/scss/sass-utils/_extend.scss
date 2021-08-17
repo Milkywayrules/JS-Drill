@@ -1,0 +1,8 @@
+/**/
+%button-base {
+  width: fit-content;
+  border-radius: 2px;
+  padding: 4px 12px;
+
+  @include btn-color($gray-100, $gray-700, $gray-300);
+}
